@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  date: 2016-08-14
+  time: 2016-08-14 12:45:31
+  comment: MyText
+
+two:
+  name: MyText
+  date: 2016-08-14
+  time: 2016-08-14 12:45:31
+  comment: MyText
