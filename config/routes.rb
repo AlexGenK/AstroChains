@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  root 'astro_objects#index'
+
+  resources :astro_objects
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
