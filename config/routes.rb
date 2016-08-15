@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'astro_objects#index'
 
+  get 'about'=>'single_pages#about'
+
   resources :astro_objects
 
   # The priority is based upon order of creation: first created -> highest priority.
