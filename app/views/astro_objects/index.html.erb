@@ -8,7 +8,7 @@
 
 <%= link_to ">>> Создать новый объект <<<", new_astro_object_path %>
 <hr>
-
+<%= 'Ничего не найдено' if @astro_objects.size==0 %>
 <% @astro_objects.each do |item| %>
 	<h3><%= link_to item.name, astro_object_path(item) %></h3>
 	<p>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: MyText
+  code: MyText
+  image: 
+  comment: MyText
+  astro_object_id: 
+
+two:
+  type: MyText
+  code: MyText
+  image: 
+  comment: MyText
+  astro_object_id: 
