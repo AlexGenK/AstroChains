@@ -10,5 +10,6 @@
 		Время: <%= item.time.strftime('%T') %><br>
 		Комментарий: <%= item.comment %>
 	</p>
+	<small><%= link_to ">>> Редактировать", edit_astro_object_path(item) %> | <%= link_to "Удалить <<<", astro_object_path(item), method: :delete, data: {confirm: "Вы уверены?"} %></small>
 	<hr>
 <% end %>
