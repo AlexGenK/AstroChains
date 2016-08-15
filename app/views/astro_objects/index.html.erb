@@ -1,3 +1,14 @@
 <h1>Список объектов</h1>
 
 <%= link_to ">>> Создать новый объект <<<", new_astro_object_path %>
+<hr>
+
+<% @astro_objects.each do |item| %>
+	<h3><%= link_to item.name, astro_object_path(item) %></h3>
+	<p>
+		Дата: <%= item.date %><br>
+		Время: <%= item.time.strftime('%T') %><br>
+		Комментарий: <%= item.comment %>
+	</p>
+	<hr>
+<% end %>

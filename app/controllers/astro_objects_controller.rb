@@ -1,6 +1,7 @@
 class AstroObjectsController < ApplicationController
 
   def index
+    @astro_objects=AstroObject.order(:name)
   end
 
   def new
@@ -9,10 +10,14 @@ class AstroObjectsController < ApplicationController
   def create
     @astro_object=AstroObject.new(astro_object_params)
     if @astro_object.save
-      render action: 'create'
+      redirect_to astro_objects_path
     else
       render action: 'new'
     end
+  end
+
+  def show
+    @astro_object=AstroObject.find(params[:id])
   end
 
   private
