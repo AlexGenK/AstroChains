@@ -1,7 +1,11 @@
 class AstroObjectsController < ApplicationController
 
   def index
-    @astro_objects=AstroObject.order(:name)
+    if params[:search]
+      @astro_objects=AstroObject.where('name LIKE ? OR name LIKE ?', "%#{params[:search].mb_chars.capitalize.to_s}%", "%#{params[:search].mb_chars.downcase.to_s}%")
+    else
+      @astro_objects=AstroObject.order(:name)
+    end
   end
 
   def new

@@ -1,5 +1,11 @@
 <h1>Список объектов</h1>
 
+<%= form_tag(astro_objects_path, :method => "get", id: "search-form") do %>
+	<%= text_field_tag :search, params[:search], placeholder: "Наименование" %>
+	<%= submit_tag "Искать" %>
+<% end %>
+<br>
+
 <%= link_to ">>> Создать новый объект <<<", new_astro_object_path %>
 <hr>
 
