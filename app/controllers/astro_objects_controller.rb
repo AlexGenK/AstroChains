@@ -22,6 +22,7 @@ class AstroObjectsController < ApplicationController
 
   def show
     @astro_object=AstroObject.find(params[:id])
+    @chains=@astro_object.chains.all
   end
 
   def edit

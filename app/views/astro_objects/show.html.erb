@@ -1,3 +1,4 @@
+<hr>
 <h3><%= @astro_object.name %></h3>
 <p>
 	Дата: <%= @astro_object.date %><br>
@@ -5,3 +6,41 @@
 	Комментарий: <%= @astro_object.comment %>
 </p>
 <small><%= link_to ">>> Редактировать", edit_astro_object_path(@astro_object) %> | <%= link_to "Удалить <<<", astro_object_path(@astro_object), method: :delete, data: {confirm: "Вы уверены?"} %></small>
+<hr>
+<h3>Цепочки диспозиций:</h3>
+<% @chains.each do |item| %>
+	<%= item.kind %>
+	<br>
+<% end %>
+<hr>
+<h3>Создать новую цепочку</h3>
+
+<%= form_for [@astro_object, @astro_object.chains.build] do |f| %>
+
+	<p>
+		<%= f.label :kind %><br>
+		<%= f.select :kind, ['Цепочка по управлению', 
+							 'Цепочка по управлению по септенеру',
+							 'Цепочка по экзальтации',
+							 'Цепочка по экзальтации по септенеру',
+							 'Цепочка по падению',
+							 'Цепочка по падению по септенеру',
+							 'Цепочка по изгнанию',
+							 'Цепочка по изгнанию по септенеру']%>
+	</p>
+
+	<p>
+		<%= f.label :code %><br>
+		<%= f.text_area :code %>
+	</p>
+
+	<p>
+		<%= f.label :comment %><br>
+		<%= f.text_area :comment %>
+	</p>
+
+	<p>
+		<%= f.submit %>
+	</p>
+
+<% end %>

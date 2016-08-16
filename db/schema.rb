@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815165350) do
+ActiveRecord::Schema.define(version: 20160815184459) do
 
   create_table "astro_objects", force: :cascade do |t|
     t.text     "name"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20160815165350) do
   end
 
   create_table "chains", force: :cascade do |t|
-    t.text     "type"
+    t.text     "kind"
     t.text     "code"
     t.binary   "image"
     t.text     "comment"
