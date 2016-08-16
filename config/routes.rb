@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'about'=>'single_pages#about'
 
   resources :astro_objects do
-    resources :chains, only: [:create]
+    resources :chains
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
