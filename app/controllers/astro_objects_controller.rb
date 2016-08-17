@@ -1,6 +1,7 @@
 class AstroObjectsController < ApplicationController
 
   def index
+  # если передана подстрока поиска то выводятся лишь те объекты, в названии которых существует данная подстрока
     if params[:search]
       @astro_objects=AstroObject.where('name LIKE ? OR name LIKE ?', "%#{params[:search].mb_chars.capitalize.to_s}%", "%#{params[:search].mb_chars.downcase.to_s}%")
     else
