@@ -1,3 +1,4 @@
+<!-- выводится объект -->
 <hr>
 <h3><%= @astro_object.name %></h3>
 <p>
@@ -7,6 +8,8 @@
 </p>
 <small><%= link_to ">>> Редактировать", edit_astro_object_path(@astro_object) %> | <%= link_to "Удалить <<<", astro_object_path(@astro_object), method: :delete, data: {confirm: "Вы уверены?"} %></small>
 <hr>
+
+<!-- выводятся цепочки диспозиций, построенные для объекта -->
 <h3>Цепочки диспозиций:</h3>
 <% @chains.each do |item| %>
 	<%= item.kind %>

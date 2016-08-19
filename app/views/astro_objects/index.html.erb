@@ -1,5 +1,6 @@
 <h1>Список объектов</h1>
 
+<!-- форма поиска -->
 <%= form_tag(astro_objects_path, :method => "get", id: "search-form") do %>
 	<%= text_field_tag :search, params[:search], placeholder: "Наименование" %>
 	<%= submit_tag "Искать" %>
@@ -8,7 +9,11 @@
 
 <%= link_to ">>> Создать новый объект <<<", new_astro_object_path %>
 <hr>
+
+<!-- сообщение выводится, если поиск оказался неудачен -->
 <%= 'Ничего не найдено' if @astro_objects.size==0 %>
+
+<!-- список объектов -->
 <% @astro_objects.each do |item| %>
 	<h3><%= link_to item.name, astro_object_path(item) %></h3>
 	<p>
