@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815184459) do
+ActiveRecord::Schema.define(version: 20160821160359) do
 
   create_table "astro_objects", force: :cascade do |t|
     t.text     "name"
@@ -28,8 +28,9 @@ ActiveRecord::Schema.define(version: 20160815184459) do
     t.binary   "image"
     t.text     "comment"
     t.integer  "astro_object_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "septener",        default: false
   end
 
   add_index "chains", ["astro_object_id"], name: "index_chains_on_astro_object_id"
