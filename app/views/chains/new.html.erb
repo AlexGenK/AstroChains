@@ -2,24 +2,59 @@
 <%= form_for [@astro_object, @astro_object.chains.build] do |f| %>
 
 	<p>
-		<%= f.label :kind %><br>
-		<%= f.select :kind, ['Цепочка по управлению', 
-							 'Цепочка по управлению по септенеру',
-							 'Цепочка по экзальтации',
-							 'Цепочка по экзальтации по септенеру',
-							 'Цепочка по падению',
-							 'Цепочка по падению по септенеру',
-							 'Цепочка по изгнанию',
-							 'Цепочка по изгнанию по септенеру']%>
+		<%= f.label :kind, 'Тип цепочки:' %>
+		<%= f.select :kind, ['по управлению', 
+							 'по экзальтации',
+							 'по падению',
+							 'по изгнанию'] %>
 	</p>
 
 	<p>
-		<%= f.label :code %><br>
-		<%= f.text_area :code %>
+		<%= f.label :septener, 'По септенеру' %>
+		<%= f.check_box :septener %>
 	</p>
 
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Ретроградность</th>
+				<th>Вес</th>
+				<th>Центр</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Солнце</td>
+				<td><input type="checkbox" name="sol_retro"></td>
+				<td><input type="number" name="sol_weigth"></td>
+				<td><select name="sol_center">
+						<option value="0">нет</option>
+						<option value="1">первый</option>
+						<option value="2">второй</option>
+						<option value="3">третий</option>
+				</td>
+				<td>---></td>
+				<td><select name="sol_relation">
+						<option value="0">Солнце</option>
+						<option value="1">Луна</option>
+						<option value="2">Меркурий</option>
+						<option value="3">Венера</option>
+						<option value="4">Марс</option>
+						<option value="5">Юпитер</option>
+						<option value="6">Сатурн</option>
+						<option value="7">Уран</option>
+						<option value="8">Нептун</option>
+						<option value="9">Плутон</option>
+				</td>			
+			</tr>
+		</tbody>
+	</table>
+
 	<p>
-		<%= f.label :comment %><br>
+		<%= f.label :comment, 'Комментарий:' %><br>
 		<%= f.text_area :comment %>
 	</p>
 
