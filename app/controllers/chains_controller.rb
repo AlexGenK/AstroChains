@@ -23,4 +23,5 @@ class ChainsController < ApplicationController
   def chain_params
     params.require(:chain).permit(:kind, :code, :image, :comment)
   end
+  
 end

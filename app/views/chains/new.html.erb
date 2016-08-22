@@ -26,30 +26,54 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>Солнце</td>
-				<td><input type="checkbox" name="sol_retro"></td>
-				<td><input type="number" name="sol_weigth"></td>
-				<td><select name="sol_center">
-						<option value="0">нет</option>
-						<option value="1">первый</option>
-						<option value="2">второй</option>
-						<option value="3">третий</option>
-				</td>
-				<td>---></td>
-				<td><select name="sol_relation">
-						<option value="0">Солнце</option>
-						<option value="1">Луна</option>
-						<option value="2">Меркурий</option>
-						<option value="3">Венера</option>
-						<option value="4">Марс</option>
-						<option value="5">Юпитер</option>
-						<option value="6">Сатурн</option>
-						<option value="7">Уран</option>
-						<option value="8">Нептун</option>
-						<option value="9">Плутон</option>
-				</td>			
-			</tr>
+			<% Chain::PLANETS.each do |planet|%>
+				<tr>
+					<td><%= planet[:planet_name]%></td>
+					<td><input type="checkbox" name=<%= "#{planet[:planet_prefix]}_retro" %>></td>
+					<td><input type="number" name=<%= "#{planet[:planet_prefix]}_weigth" %> value="0"></td>
+					<td><select name=<%= "#{planet[:planet_prefix]}_center" %>>
+							<option value="0">нет</option>
+							<option value="1">первый</option>
+							<option value="2">второй</option>
+							<option value="3">третий</option>
+						</select>
+					</td>
+					<td>---></td>
+					<td><select name=<%= "#{planet[:planet_prefix]}_relation" %>>
+							<% unless planet[:planet_prefix] == 'sun' %>
+								<option value="0">Солнце</option>
+							<% end %>
+							<% unless planet[:planet_prefix] == 'moo' %>
+								<option value="1">Луна</option>
+							<% end %>
+							<% unless planet[:planet_prefix] == 'mer' %>
+								<option value="2">Меркурий</option>
+							<% end %>
+							<% unless planet[:planet_prefix] == 'ven' %>
+								<option value="3">Венера</option>
+							<% end %>
+							<% unless planet[:planet_prefix] == 'mar' %>
+								<option value="4">Марс</option>
+							<% end %>
+							<% unless planet[:planet_prefix] == 'jup' %>
+								<option value="5">Юпитер</option>
+							<% end %>
+							<% unless planet[:planet_prefix] == 'sat' %>
+								<option value="6">Сатурн</option>
+							<% end %>
+							<% unless planet[:planet_prefix] == 'ura' %>
+								<option value="7">Уран</option>
+							<% end %>
+							<% unless planet[:planet_prefix] == 'nep' %>
+								<option value="8">Нептун</option>
+							<% end %>
+							<% unless planet[:planet_prefix] == 'plu' %>
+								<option value="9">Плутон</option>
+							<% end %>
+						</select>
+					</td>			
+				</tr>
+			<% end %>
 		</tbody>
 	</table>
 
