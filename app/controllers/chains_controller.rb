@@ -7,7 +7,7 @@ class ChainsController < ApplicationController
   def create
     @astro_object=AstroObject.find(params[:astro_object_id])
     @chain=@astro_object.chains.new(chain_params)
-    @chain.code=params[:sol_relation]
+    @chain.code=params.to_s
     @chain.save
     redirect_to @astro_object
   end
