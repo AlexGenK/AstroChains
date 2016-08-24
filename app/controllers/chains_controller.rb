@@ -10,6 +10,7 @@ class ChainsController < ApplicationController
     @astro_object=AstroObject.find(params[:astro_object_id])
     @chain=@astro_object.chains.new(chain_params)
     @chain.code=params.to_s
+    Chain.graph_create(chain_params)
 
     if params[:commit]=='Просмотреть'
       render action: 'new'

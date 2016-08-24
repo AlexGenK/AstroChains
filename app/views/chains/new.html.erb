@@ -37,7 +37,8 @@
 																				['третий', 3]] %>
 					</td>
 					<td>---></td>
-					<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [['Солнце', 0],
+					<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [['нет', 100],
+																				  ['Солнце', 0],
 																				  ['Луна', 1],
 																				  ['Меркурий', 2],
 																				  ['Венера', 3],
