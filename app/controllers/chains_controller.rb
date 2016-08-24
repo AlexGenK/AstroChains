@@ -29,7 +29,16 @@ class ChainsController < ApplicationController
 
   # разрешение передачи параметров
   def chain_params
-    params.require(:chain).permit(:kind, :code, :image, :comment, :septener)
+    params.require(:chain).permit(:kind, :code, :image, :comment, :septener,  :sun_retro, :sun_weigth, :sun_center, :sun_relation,
+                                                                              :moo_retro, :moo_weigth, :moo_center, :moo_relation,
+                                                                              :mer_retro, :mer_weigth, :mer_center, :mer_relation,
+                                                                              :ven_retro, :ven_weigth, :ven_center, :ven_relation,
+                                                                              :mar_retro, :mar_weigth, :mar_center, :mar_relation,
+                                                                              :jup_retro, :jup_weigth, :jup_center, :jup_relation,
+                                                                              :sat_retro, :sat_weigth, :sat_center, :sat_relation,
+                                                                              :ura_retro, :ura_weigth, :ura_center, :ura_relation,
+                                                                              :nep_retro, :nep_weigth, :nep_center, :nep_relation,
+                                                                              :plu_retro, :plu_weigth, :plu_center, :plu_relation)
   end
   
 end

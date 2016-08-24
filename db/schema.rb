@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160821160359) do
+ActiveRecord::Schema.define(version: 20160824073604) do
 
   create_table "astro_objects", force: :cascade do |t|
     t.text     "name"
@@ -31,6 +31,46 @@ ActiveRecord::Schema.define(version: 20160821160359) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.boolean  "septener",        default: false
+    t.boolean  "sun_retro"
+    t.integer  "sun_weigth"
+    t.integer  "sun_center"
+    t.integer  "sun_relation"
+    t.boolean  "moo_retro"
+    t.integer  "moo_weigth"
+    t.integer  "moo_center"
+    t.integer  "moo_relation"
+    t.boolean  "mer_retro"
+    t.integer  "mer_weigth"
+    t.integer  "mer_center"
+    t.integer  "mer_relation"
+    t.boolean  "ven_retro"
+    t.integer  "ven_weigth"
+    t.integer  "ven_center"
+    t.integer  "ven_relation"
+    t.boolean  "mar_retro"
+    t.integer  "mar_weigth"
+    t.integer  "mar_center"
+    t.integer  "mar_relation"
+    t.boolean  "jup_retro"
+    t.integer  "jup_weigth"
+    t.integer  "jup_center"
+    t.integer  "jup_relation"
+    t.boolean  "sat_retro"
+    t.integer  "sat_weigth"
+    t.integer  "sat_center"
+    t.integer  "sat_relation"
+    t.boolean  "ura_retro"
+    t.integer  "ura_weigth"
+    t.integer  "ura_center"
+    t.integer  "ura_relation"
+    t.boolean  "nep_retro"
+    t.integer  "nep_weigth"
+    t.integer  "nep_center"
+    t.integer  "nep_relation"
+    t.boolean  "plu_retro"
+    t.integer  "plu_weigth"
+    t.integer  "plu_center"
+    t.integer  "plu_relation"
   end
 
   add_index "chains", ["astro_object_id"], name: "index_chains_on_astro_object_id"

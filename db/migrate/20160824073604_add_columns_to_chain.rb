@@ -1,0 +1,44 @@
+class AddColumnsToChain < ActiveRecord::Migration
+  def change
+    add_column :chains, :sun_retro, :boolean
+    add_column :chains, :sun_weigth, :integer
+    add_column :chains, :sun_center, :integer
+    add_column :chains, :sun_relation, :integer
+    add_column :chains, :moo_retro, :boolean
+    add_column :chains, :moo_weigth, :integer
+    add_column :chains, :moo_center, :integer
+    add_column :chains, :moo_relation, :integer
+    add_column :chains, :mer_retro, :boolean
+    add_column :chains, :mer_weigth, :integer
+    add_column :chains, :mer_center, :integer
+    add_column :chains, :mer_relation, :integer
+    add_column :chains, :ven_retro, :boolean
+    add_column :chains, :ven_weigth, :integer
+    add_column :chains, :ven_center, :integer
+    add_column :chains, :ven_relation, :integer
+    add_column :chains, :mar_retro, :boolean
+    add_column :chains, :mar_weigth, :integer
+    add_column :chains, :mar_center, :integer
+    add_column :chains, :mar_relation, :integer
+    add_column :chains, :jup_retro, :boolean
+    add_column :chains, :jup_weigth, :integer
+    add_column :chains, :jup_center, :integer
+    add_column :chains, :jup_relation, :integer
+    add_column :chains, :sat_retro, :boolean
+    add_column :chains, :sat_weigth, :integer
+    add_column :chains, :sat_center, :integer
+    add_column :chains, :sat_relation, :integer
+    add_column :chains, :ura_retro, :boolean
+    add_column :chains, :ura_weigth, :integer
+    add_column :chains, :ura_center, :integer
+    add_column :chains, :ura_relation, :integer
+    add_column :chains, :nep_retro, :boolean
+    add_column :chains, :nep_weigth, :integer
+    add_column :chains, :nep_center, :integer
+    add_column :chains, :nep_relation, :integer
+    add_column :chains, :plu_retro, :boolean
+    add_column :chains, :plu_weigth, :integer
+    add_column :chains, :plu_center, :integer
+    add_column :chains, :plu_relation, :integer
+  end
+end

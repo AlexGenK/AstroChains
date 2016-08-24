@@ -29,48 +29,24 @@
 			<% Chain::PLANETS.each do |planet|%>
 				<tr>
 					<td><%= planet[:planet_name]%></td>
-					<td><input type="checkbox" name=<%= "#{planet[:planet_prefix]}_retro" %>></td>
-					<td><input type="number" name=<%= "#{planet[:planet_prefix]}_weigth" %> value="0"></td>
-					<td><select name=<%= "#{planet[:planet_prefix]}_center" %>>
-							<option value="0">нет</option>
-							<option value="1">первый</option>
-							<option value="2">второй</option>
-							<option value="3">третий</option>
-						</select>
+					<td><%= f.check_box "#{planet[:planet_prefix]}_retro".to_sym %></td>
+					<td><%= f.number_field "#{planet[:planet_prefix]}_weigth".to_sym %></td>
+					<td><%= f.select "#{planet[:planet_prefix]}_center".to_sym, [['нет', 0],
+																				['первый', 1],
+																				['второй', 2],
+																				['третий', 3]] %>
 					</td>
 					<td>---></td>
-					<td><select name=<%= "#{planet[:planet_prefix]}_relation" %>>
-							<% unless planet[:planet_prefix] == 'sun' %>
-								<option value="0">Солнце</option>
-							<% end %>
-							<% unless planet[:planet_prefix] == 'moo' %>
-								<option value="1">Луна</option>
-							<% end %>
-							<% unless planet[:planet_prefix] == 'mer' %>
-								<option value="2">Меркурий</option>
-							<% end %>
-							<% unless planet[:planet_prefix] == 'ven' %>
-								<option value="3">Венера</option>
-							<% end %>
-							<% unless planet[:planet_prefix] == 'mar' %>
-								<option value="4">Марс</option>
-							<% end %>
-							<% unless planet[:planet_prefix] == 'jup' %>
-								<option value="5">Юпитер</option>
-							<% end %>
-							<% unless planet[:planet_prefix] == 'sat' %>
-								<option value="6">Сатурн</option>
-							<% end %>
-							<% unless planet[:planet_prefix] == 'ura' %>
-								<option value="7">Уран</option>
-							<% end %>
-							<% unless planet[:planet_prefix] == 'nep' %>
-								<option value="8">Нептун</option>
-							<% end %>
-							<% unless planet[:planet_prefix] == 'plu' %>
-								<option value="9">Плутон</option>
-							<% end %>
-						</select>
+					<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [['Солнце', 0],
+																				  ['Луна', 1],
+																				  ['Меркурий', 2],
+																				  ['Венера', 3],
+																				  ['Марс', 4],
+																				  ['Юпитер', 5],
+																				  ['Сатурн', 6],
+																				  ['Уран', 7],
+																				  ['Нептун', 8],
+																				  ['Плутон', 9]]%>	
 					</td>			
 				</tr>
 			<% end %>
