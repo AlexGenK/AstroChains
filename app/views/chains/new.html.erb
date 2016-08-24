@@ -1,5 +1,5 @@
 <h3>Создание цепочки диспозиций для объекта <strong><%= @astro_object.name %></strong></h3>
-<%= form_for [@astro_object, @astro_object.chains.build] do |f| %>
+<%= form_for [@astro_object, @chain] do |f| %>
 
 	<p>
 		<%= f.label :kind, 'Тип цепочки:' %>
@@ -83,7 +83,8 @@
 	</p>
 
 	<p>
-		<%= f.submit %>
+		<%= f.submit 'Просмотреть' %>
+		<%= f.submit 'Сохранить' %>
 	</p>
 
 <% end %>
