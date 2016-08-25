@@ -13,8 +13,12 @@
 <h3>Цепочки диспозиций:</h3>
 <% @chains.each do |item| %>
 	<%= item.kind %>
+	<% if item.septener %>
+		по септенеру
+	<% end %>
 	<%= link_to "Удалить <<<", [@astro_object, item], method: :delete, data: {confirm: "Вы уверены?"} %>
 	<br>
+	<%= image_tag("graphs/#{item.id}.png") %>
+	<hr>
 <% end %>
-<hr>
 <%= link_to ">>> Создать новую цепочку <<<", new_astro_object_chain_path(@astro_object) %>

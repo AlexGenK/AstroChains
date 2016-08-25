@@ -3,22 +3,24 @@ class ChainsController < ApplicationController
   def new
     @astro_object=AstroObject.find(params[:astro_object_id])
     @chain=@astro_object.chains.build
+    @preview_name=''
   end
 
   def create
-
     @astro_object=AstroObject.find(params[:astro_object_id])
     @chain=@astro_object.chains.new(chain_params)
     @chain.code=params.to_s
-    Chain.graph_create(chain_params)
 
     if params[:commit]=='Просмотреть'
+      @preview_name='preview'
+      Chain.graph_create(chain_params, @preview_name)
       render action: 'new'
     else
       @chain.save
+      @preview_name=@chain.id.to_s
+      Chain.graph_create(chain_params, @preview_name)
       redirect_to @astro_object
     end
-
   end
 
   def destroy

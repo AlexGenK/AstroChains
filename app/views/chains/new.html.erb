@@ -54,6 +54,11 @@
 		</tbody>
 	</table>
 
+	<% if !@preview_name.empty? %>
+		<br>
+		<%= image_tag("graphs/#{@preview_name}.png") %>
+	<% end %>
+
 	<p>
 		<%= f.label :comment, 'Комментарий:' %><br>
 		<%= f.text_area :comment %>

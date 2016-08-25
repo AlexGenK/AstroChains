@@ -16,8 +16,9 @@ class Chain < ActiveRecord::Base
 
   belongs_to :astro_object
 
-  def self.graph_create(chain_params)
+  def self.graph_create(chain_params, image_name)
 
+    # logger.debug "params = #{chain_params}"
     g = GraphViz::new( "G", "rankdir" => "LR" )
     graph_nodes=[]
     c1=g.add_graph("cluster1")
@@ -37,8 +38,8 @@ class Chain < ActiveRecord::Base
       pl_prefix=PLANETS[i][:planet_prefix]
       pl_symbol=PLANETS[i][:planet_symbol]
       pl_weigth=chain_params["#{pl_prefix}_weigth"].to_i
+      pl_weigth=" " if pl_weigth==0
       pl_center=chain_params["#{pl_prefix}_center"]
-      logger.debug "pl_prefix = #{pl_prefix}, pl_symbol = #{pl_symbol}, pl_weigth = #{pl_weigth}, pl_center = #{pl_center}"
       case pl_center
       when '0'
         graph_nodes[i]=g.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='20'>#{pl_symbol}<sub>#{pl_weigth}</sub></font>>")
@@ -56,7 +57,7 @@ class Chain < ActiveRecord::Base
       g.add_edges(graph_nodes[i], graph_nodes[pl_relation]) if pl_relation<100
     end
     
-    g.output( :png => "graphs/astro.png" )
+    g.output(:png => "app/assets/images/graphs/#{image_name}.png")
   end
 
 end
