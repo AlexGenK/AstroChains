@@ -10,7 +10,9 @@
 <hr>
 
 <!-- выводятся цепочки диспозиций, построенные для объекта -->
-<h3>Цепочки диспозиций:</h3>
+<h3>Построенные цепочки</h3>
+<%= link_to ">>> Создать новую цепочку <<<", new_astro_object_chain_path(@astro_object) %>
+<hr>
 <% @chains.each do |item| %>
 	<%= item.kind %>
 	<% if item.septener %>
@@ -22,4 +24,3 @@
 	<%= link_to ">>> Редактировать", edit_astro_object_chain_path(@astro_object, item) %> | <%= link_to "Удалить <<<", [@astro_object, item], method: :delete, data: {confirm: "Вы уверены?"} %>
 	<hr>
 <% end %>
-<%= link_to ">>> Создать новую цепочку <<<", new_astro_object_chain_path(@astro_object) %>
