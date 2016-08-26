@@ -1,0 +1,72 @@
+<h3>Редактирование цепочки диспозиций для объекта <strong><%= @astro_object.name %></strong></h3>
+<%= form_for [@astro_object, @chain] do |f| %>
+
+	<p>
+		<%= f.label :kind, 'Тип цепочки:' %>
+		<%= f.select :kind, ['по управлению', 
+							 'по экзальтации',
+							 'по падению',
+							 'по изгнанию'] %>
+	</p>
+
+	<p>
+		<%= f.label :septener, 'По септенеру' %>
+		<%= f.check_box :septener %>
+	</p>
+
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Ретроградность</th>
+				<th>Вес</th>
+				<th>Центр</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% Chain::PLANETS.each do |planet|%>
+				<tr>
+					<td><%= planet[:planet_name]%></td>
+					<td><%= f.check_box "#{planet[:planet_prefix]}_retro".to_sym %></td>
+					<td><%= f.number_field "#{planet[:planet_prefix]}_weigth".to_sym %></td>
+					<td><%= f.select "#{planet[:planet_prefix]}_center".to_sym, [['нет', 0],
+																				['первый', 1],
+																				['второй', 2],
+																				['третий', 3]] %>
+					</td>
+					<td>---></td>
+					<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [['нет', 100],
+																				  ['Солнце', 0],
+																				  ['Луна', 1],
+																				  ['Меркурий', 2],
+																				  ['Венера', 3],
+																				  ['Марс', 4],
+																				  ['Юпитер', 5],
+																				  ['Сатурн', 6],
+																				  ['Уран', 7],
+																				  ['Нептун', 8],
+																				  ['Плутон', 9]]%>	
+					</td>			
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<% if !@preview_name.empty? %>
+		<br>
+		<%= image_tag("graphs/#{@preview_name}.png") %>
+	<% end %>
+
+	<p>
+		<%= f.label :comment, 'Комментарий:' %><br>
+		<%= f.text_area :comment %>
+	</p>
+
+	<p>
+		<%= f.submit 'Просмотреть' %>
+		<%= f.submit 'Сохранить' %>
+	</p>
+
+<% end %>

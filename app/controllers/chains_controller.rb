@@ -28,6 +28,30 @@ class ChainsController < ApplicationController
     redirect_to AstroObject.find(params[:astro_object_id])
   end
 
+  def edit
+    @astro_object=AstroObject.find(params[:astro_object_id])
+    @chain=Chain.find(params[:id])
+    @preview_name=@chain.id.to_s
+  end
+
+  def update
+    @astro_object=AstroObject.find(params[:astro_object_id])
+    @chain=Chain.find(params[:id])
+
+    if params[:commit]=='Просмотреть'
+      @preview_name=@chain.id.to_s
+      Chain.graph_create(chain_params, @preview_name)
+      @chain.update(chain_params)
+      render action: 'edit'
+    else
+      if @chain.update(chain_params)
+        redirect_to @astro_object
+      else
+        render action: 'edit'
+      end
+    end
+  end
+
   private
 
   # разрешение передачи параметров
