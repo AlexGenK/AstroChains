@@ -38,17 +38,30 @@ class Chain < ActiveRecord::Base
       pl_prefix=PLANETS[i][:planet_prefix]
       pl_symbol=PLANETS[i][:planet_symbol]
       pl_weigth=chain_params["#{pl_prefix}_weigth"].to_i
-      pl_weigth=" " if pl_weigth==0
+      pl_retro=chain_params["#{pl_prefix}_retro"].to_i
+
+      if pl_weigth==0
+        pl_weigth_string=''
+      else
+        pl_weigth_string="<font color='forestgreen' point-size='20'>#{pl_weigth}</font>"
+      end
+
+      if pl_retro==0
+        pl_retro_string=''
+      else
+        pl_retro_string="<font color='black' point-size='20'>N</font>"
+      end
+
       pl_center=chain_params["#{pl_prefix}_center"]
       case pl_center
       when '0'
-        graph_nodes[i]=g.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='20'>#{pl_symbol}<sub>#{pl_weigth}</sub></font>>")
+        graph_nodes[i]=g.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       when '1'
-        graph_nodes[i]=c1.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='20'>#{pl_symbol}<sub>#{pl_weigth}</sub></font>>")
+        graph_nodes[i]=c1.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       when '2'
-        graph_nodes[i]=c2.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='20'>#{pl_symbol}<sub>#{pl_weigth}</sub></font>>")
+        graph_nodes[i]=c2.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       else
-        graph_nodes[i]=c3.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='20'>#{pl_symbol}<sub>#{pl_weigth}</sub></font>>")
+        graph_nodes[i]=c3.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       end
     end
 
