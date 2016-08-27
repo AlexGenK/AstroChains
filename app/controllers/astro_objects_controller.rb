@@ -42,6 +42,9 @@ class AstroObjectsController < ApplicationController
   end
 
   def destroy
+    Chain.where(astro_object_id: params[:id]).each do |item|
+      File.delete("app/assets/images/graphs/#{item.id}.png")
+    end
     AstroObject.find(params[:id]).destroy
     redirect_to astro_objects_path
   end

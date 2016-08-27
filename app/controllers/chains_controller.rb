@@ -25,6 +25,7 @@ class ChainsController < ApplicationController
 
   def destroy
     Chain.find(params[:id]).destroy
+    File.delete("app/assets/images/graphs/#{params[:id]}.png")
     redirect_to AstroObject.find(params[:astro_object_id])
   end
 

@@ -54,6 +54,10 @@
 		</tbody>
 	</table>
 
+	<p>
+		<%= f.submit 'Просмотреть' %>
+	</p>
+
 	<% if !@preview_name.empty? %>
 		<br>
 		<%= image_tag("graphs/#{@preview_name}.png") %>
@@ -65,7 +69,6 @@
 	</p>
 
 	<p>
-		<%= f.submit 'Просмотреть' %>
 		<%= f.submit 'Сохранить' %>
 	</p>
 
