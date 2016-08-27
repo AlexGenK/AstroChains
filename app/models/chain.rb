@@ -1,7 +1,8 @@
 # модель - цепочка диспозиций построенная для какого-либо объекта
-
 class Chain < ActiveRecord::Base
 
+  # константа в кторой хранятся названия планет, соответствующие им префиксы в модели цепочки
+  # и символ которым они кодируются в специальном шрифте 'astro'
   PLANETS=[ {:planet_name=>'Солнце', :planet_prefix=>'sun', :planet_symbol=>'Q'},
             {:planet_name=>'Луна', :planet_prefix=>'moo', :planet_symbol=>'R'},
             {:planet_name=>'Меркурий', :planet_prefix=>'mer', :planet_symbol=>'S'},
@@ -16,9 +17,11 @@ class Chain < ActiveRecord::Base
 
   belongs_to :astro_object
 
+  # метод, визуализирующий цепочку в виде графа с помощью библиотеки GraphWiz. принмает хэш с параметрами
+  # цепочки (в соответствии с моделью) и имя файла в который будет производится визуализация
   def self.graph_create(chain_params, image_name)
 
-    # logger.debug "params = #{chain_params}"
+    # создается объект-направленный граф с тремя кластерами
     g = GraphViz::new( "G", "rankdir" => "LR" )
     graph_nodes=[]
     c1=g.add_graph("cluster1")
@@ -28,30 +31,36 @@ class Chain < ActiveRecord::Base
     c3=g.add_graph("cluster3")
     c3["color"]="red"
 
+    # если цепочка строится по септенеру, количесвто планет ограничивается семью. иначе - девять
     if chain_params[:septener]=='1'
       end_planet=6
     else
       end_planet=9
     end
 
+    # проходим цикл по всем планетам для формирования узлов графа
     0.upto end_planet do |i|
+      # для планеты вытаскиваем префикс, символ в шрифте, вес в графе и признак ретроградности
       pl_prefix=PLANETS[i][:planet_prefix]
       pl_symbol=PLANETS[i][:planet_symbol]
       pl_weigth=chain_params["#{pl_prefix}_weigth"].to_i
       pl_retro=chain_params["#{pl_prefix}_retro"].to_i
 
+      # формируем строку, которая в описании узла-планеты в графе отвечает за вес
       if pl_weigth==0
         pl_weigth_string=''
       else
         pl_weigth_string="<font color='forestgreen' point-size='20'>#{pl_weigth}</font>"
       end
 
+      # формируем строку, которая в описании узла-планеты в графе отвечает за ретроградность
       if pl_retro==0
         pl_retro_string=''
       else
         pl_retro_string="<font color='black' point-size='20'>N</font>"
       end
 
+      # узнаем, принадлежит ли планета к какому-либо кластеру и добавляем узел-планету к соответствующему кластеру
       pl_center=chain_params["#{pl_prefix}_center"]
       case pl_center
       when '0'
@@ -65,11 +74,15 @@ class Chain < ActiveRecord::Base
       end
     end
 
+    # снова проходим по всем планетам для создания связей между узлами графа
     0.upto end_planet do |i|
+      # определяем с какой планетой связана планета
       pl_relation=chain_params["#{PLANETS[i][:planet_prefix]}_relation"].to_i
+      # если связь есть, то создаем
       g.add_edges(graph_nodes[i], graph_nodes[pl_relation]) if pl_relation<100
     end
     
+    # собственно визуализация графа в файл
     g.output(:png => "app/assets/images/graphs/#{image_name}.png")
   end
 

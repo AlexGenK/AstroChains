@@ -1,3 +1,4 @@
+# контроллер обрабатывающий астрологические объекты для которых строятся цепочки диспозиций
 class AstroObjectsController < ApplicationController
 
   def index
@@ -42,9 +43,12 @@ class AstroObjectsController < ApplicationController
   end
 
   def destroy
+
+    # перед удалением объекта удаляются также все изображеня цепочек диспозиций этого объекта
     Chain.where(astro_object_id: params[:id]).each do |item|
       File.delete("app/assets/images/graphs/#{item.id}.png")
     end
+    
     AstroObject.find(params[:id]).destroy
     redirect_to astro_objects_path
   end

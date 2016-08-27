@@ -1,7 +1,9 @@
+# контроллер обрабатывающий цепочки диспозиций
 class ChainsController < ApplicationController
 
   def new
     @astro_object=AstroObject.find(params[:astro_object_id])
+    # создается пустой объект-цепочка, прчием имя графического файла с его отображением - пустое
     @chain=@astro_object.chains.build
     @preview_name=''
   end
@@ -10,7 +12,10 @@ class ChainsController < ApplicationController
     @astro_object=AstroObject.find(params[:astro_object_id])
     @chain=@astro_object.chains.new(chain_params)
     @chain.code=params.to_s
-
+    # если в форме был нажата кнопка просмотра, то цепочка создается и визуализируется с именем 'preview', 
+    # но не записывается и снова вводится форма создания цепочки.
+    # в обратном случае цепочка записывается, визуализируется с именем-id объекта и выводится форма просмотра
+    # объекта к котрому принадлежит цепочка
     if params[:commit]=='Просмотреть'
       @preview_name='preview'
       Chain.graph_create(chain_params, @preview_name)
@@ -25,6 +30,7 @@ class ChainsController < ApplicationController
 
   def destroy
     Chain.find(params[:id]).destroy
+    # после удаления цепочки удаляется и файл с ее визуализацией
     File.delete("app/assets/images/graphs/#{params[:id]}.png")
     redirect_to AstroObject.find(params[:astro_object_id])
   end
@@ -38,10 +44,12 @@ class ChainsController < ApplicationController
   def update
     @astro_object=AstroObject.find(params[:astro_object_id])
     @chain=Chain.find(params[:id])
-
+    @preview_name=@chain.id.to_s
+    Chain.graph_create(chain_params, @preview_name)
+    # если в форме был нажата кнопка просмотра, то цепочка меняется, визуализируется с именем-id цепочки, 
+    # и снова вводится форма редактирования цепочки.
+    # в обратном случае происходит то же самое, но выводится форма просмотра объекта к котрому принадлежит цепочка
     if params[:commit]=='Просмотреть'
-      @preview_name=@chain.id.to_s
-      Chain.graph_create(chain_params, @preview_name)
       @chain.update(chain_params)
       render action: 'edit'
     else

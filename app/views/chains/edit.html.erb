@@ -14,6 +14,7 @@
 		<%= f.check_box :septener %>
 	</p>
 
+	<!-- свойства планет в цепочке организованы в таблицу -->
 	<table>
 		<thead>
 			<tr>
@@ -58,6 +59,7 @@
 		<%= f.submit 'Просмотреть' %>
 	</p>
 
+	<!-- визуализация постренной цепочки -->
 	<% if !@preview_name.empty? %>
 		<br>
 		<%= image_tag("graphs/#{@preview_name}.png") %>
