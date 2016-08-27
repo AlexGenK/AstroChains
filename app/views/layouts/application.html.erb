@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- подключаем bootstrap -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AstroChains - составление и хранение цепочек диспозиций</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -15,14 +19,17 @@
   <meta name="theme-color" content="#ffffff">
 
 </head>
-<body>
-<!-- навигация -->
-<nav>
-  <a href='<%= astro_objects_path %>'>Список объектов</a> | 
-  <a href='/about'>О программе</a>
-</nav>
+<body class="container">
+  <!-- навигация -->
+  <nav>
+    <ul>
+      <li><%= link_to 'Список объектов', astro_objects_path %></li>
+      <li><%= link_to 'О программе', about_path %></li>
+    </ul>
+  </nav>
+  <hr>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>
