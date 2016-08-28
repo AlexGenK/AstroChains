@@ -1,13 +1,21 @@
 <h1>Список объектов</h1>
 
 <!-- форма поиска -->
-<%= form_tag(astro_objects_path, :method => "get", id: "search-form") do %>
-	<%= text_field_tag :search, params[:search], placeholder: "Наименование" %>
-	<%= submit_tag "Искать" %>
-<% end %>
+<div class='row'>
+	<div class='col-xs-6'>
+		<%= form_tag(astro_objects_path, :method => "get", id: "search-form") do %>
+			<div class='input-group'>
+				<%= text_field_tag :search, params[:search], placeholder: "Наименование", class: "form-control" %>
+				<span class='input-group-btn'>
+					<%= submit_tag "Найти", class: "btn btn-default" %>
+				</span>
+			</div>
+		<% end %>
+	</div>
+</div>
 <br>
 
-<%= link_to ">>> Создать новый объект <<<", new_astro_object_path %>
+<%= link_to "Создать новый объект", new_astro_object_path, class: "btn btn-default" %>
 <hr>
 
 <!-- сообщение выводится, если поиск оказался неудачен -->
