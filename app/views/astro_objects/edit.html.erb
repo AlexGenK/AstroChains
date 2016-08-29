@@ -1,29 +1,39 @@
-<h1>Редактируем объект <%= @astro_object.name %></h1>
+<h2>Редактируем: <%= @astro_object.name %></h2>
+<br>
 
-<%= form_for @astro_object do |f| %>
+<%= form_for @astro_object, html: {class: "form-horizontal"} do |f| %>
 
-	<p>
-		<%= f.label :name %><br>
-		<%= f.text_field :name %>
-	</p>
+	<div class='form-group'>
+		<%= f.label :name, "Наименование:", class: "control-label col-sm-2" %>
+		<div class="col-sm-5">
+			<%= f.text_field :name, class: "form-control" %>
+		</div>
+	</div>
 
-	<p>
-		<%= f.label :date %><br>
-		<%= f.date_field :date %>
-	</p>
+	<div class='form-group'>
+		<%= f.label :date, "Дата:", class: "control-label col-sm-2" %>
+		<div class="col-sm-2">
+			<%= f.date_field :date, class: "form-control" %>
+		</div>
 
-	<p>
-		<%= f.label :time %><br>
-		<%= f.time_field :time %>
-	</p>
+		<%= f.label :time, "Время:", class: "control-label col-sm-1" %>
+		<div class="col-sm-2">
+			<%= f.time_field :time, class: "form-control" %>
+		</div>
+	</div>
 
-	<p>
-		<%= f.label :comment %><br>
-		<%= f.text_area :comment %>
-	</p>
+	<div class='form-group'>
+		<%= f.label :comment, "Комментарий:", class: "control-label col-sm-2" %>
+		<div class="col-sm-5">
+			<%= f.text_area :comment, class: "form-control", rows: "5" %>
+		</div>
+	</div>
 
-	<p>
-		<%= f.submit %>
-	</p>
+	<div class='form-group'>
+		<div class="col-sm-offset-2 col-sm-10">
+			<%= f.submit "Сохранить", class: "btn btn-primary" %>
+			<%= f.submit "Вернуться", class: "btn btn-default" %>
+		</div>
+	</div>
 
 <% end %>
