@@ -2,6 +2,7 @@
 class AstroObjectsController < ApplicationController
 
   def index
+    params[:search]='' if params[:commit]=='Показать все'
     # если передана подстрока поиска то выводятся лишь те объекты, в названии которых существует данная подстрока
     # как в капитализированном, так и в обычном виде
     if params[:search]

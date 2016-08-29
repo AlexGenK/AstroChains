@@ -2,12 +2,13 @@
 
 <!-- форма поиска -->
 <div class='row'>
-	<div class='col-xs-6'>
+	<div class='col-xs-6'>	
 		<%= form_tag(astro_objects_path, :method => "get", id: "search-form") do %>
 			<div class='input-group'>
 				<%= text_field_tag :search, params[:search], placeholder: "Наименование", class: "form-control" %>
 				<span class='input-group-btn'>
 					<%= submit_tag "Найти", class: "btn btn-default" %>
+					<%= submit_tag "Показать все", class: "btn btn-default" %>
 				</span>
 			</div>
 		<% end %>
@@ -15,7 +16,7 @@
 </div>
 <br>
 
-<%= link_to "Создать новый объект", new_astro_object_path, class: "btn btn-default" %>
+<%= link_to "Создать новый объект", new_astro_object_path, class: "btn btn-primary" %>
 <hr>
 
 <!-- сообщение выводится, если поиск оказался неудачен -->
@@ -23,12 +24,40 @@
 
 <!-- список объектов -->
 <% @astro_objects.each do |item| %>
-	<h3><%= link_to item.name, astro_object_path(item) %></h3>
-	<p>
-		Дата: <%= item.date %><br>
-		Время: <%= item.time.strftime('%T') %><br>
-		Комментарий: <%= item.comment %>
-	</p>
-	<small><%= link_to ">>> Редактировать", edit_astro_object_path(item) %> | <%= link_to "Удалить <<<", astro_object_path(item), method: :delete, data: {confirm: "Вы уверены?"} %></small>
+	<div class='row'>
+		<div class='col-xs-4'>
+			<h3><%= link_to item.name, astro_object_path(item) %></h3>
+		</div>
+		<div class='col-xs-6'>
+			<div class='row'>
+				<div class='col-xs-12 col-md-3 col-lg-2'>
+					Дата: 
+				</div>
+				<div class='col-xs-12 col-md-9 col-lg-10'>
+					<%= item.date %>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-xs-12 col-md-3 col-lg-2'>
+					Время: 
+				</div>
+				<div class='col-xs-12 col-md-9 col-lg-10'>
+					<%= item.time.strftime('%T') %><br>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-xs-12 col-md-3 col-lg-2'>
+					Комментарий: 
+				</div>
+				<div class='col-xs-12 col-md-9 col-lg-10'>
+					<%= item.comment %>
+				</div>
+			</div>
+		</div>
+		<div class='col-xs-2'>
+			<p><%= link_to "Редактировать", edit_astro_object_path(item), class: "btn btn-default btn-block" %></p>
+			<p><%= link_to "Удалить", astro_object_path(item), method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-danger btn-block" %></p>
+		</div>
+	</div>
 	<hr>
 <% end %>
