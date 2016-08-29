@@ -47,3 +47,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # гем интерфейса с GraphViz - библиотекой отрисовывающей графы
 gem 'ruby-graphviz'
+
+# разбиение на страницы
+gem 'will_paginate', '~> 3.0.5'
+gem 'will_paginate-bootstrap'
