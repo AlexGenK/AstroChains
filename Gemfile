@@ -51,3 +51,7 @@ gem 'ruby-graphviz'
 # разбиение на страницы
 gem 'will_paginate', '~> 3.0.5'
 gem 'will_paginate-bootstrap'
+
+# datetime picker
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails'
