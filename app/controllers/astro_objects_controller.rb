@@ -35,7 +35,7 @@ class AstroObjectsController < ApplicationController
   end
 
   def update
-    if params[:commit]=="Вернуться"
+    if params[:commit]=="Отменить"
       redirect_to action: 'index', page: @@current_page
     else
       @astro_object=AstroObject.find(params[:id])
