@@ -10,6 +10,7 @@ class AstroObjectsController < ApplicationController
     else
       @astro_objects=AstroObject.paginate(:page=>params[:page]).order(:name)
     end
+    @@current_page=params[:page]
   end
 
   def new
@@ -34,12 +35,15 @@ class AstroObjectsController < ApplicationController
   end
 
   def update
-    @astro_object=AstroObject.find(params[:id])
-
-    if @astro_object.update(astro_object_params)
-      redirect_to @astro_object
+    if params[:commit]=="Вернуться"
+      redirect_to action: 'index', page: @@current_page
     else
-      render action: 'edit'
+      @astro_object=AstroObject.find(params[:id])
+      if @astro_object.update(astro_object_params)
+        redirect_to @astro_object
+      else
+        render action: 'edit'
+      end
     end
   end
 
