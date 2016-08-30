@@ -14,14 +14,19 @@ class AstroObjectsController < ApplicationController
   end
 
   def new
+    @astro_object=AstroObject.new
   end
 
   def create
-    @astro_object=AstroObject.new(astro_object_params)
-    if @astro_object.save
-      redirect_to astro_objects_path
+    if params[:commit]=="Отменить"
+      redirect_to action: 'index', page: @@current_page||=1
     else
-      render action: 'new'
+      @astro_object=AstroObject.new(astro_object_params)
+      if @astro_object.save
+        redirect_to astro_objects_path
+      else
+        render action: 'new'
+      end
     end
   end
 
@@ -36,7 +41,7 @@ class AstroObjectsController < ApplicationController
 
   def update
     if params[:commit]=="Отменить"
-      redirect_to action: 'index', page: @@current_page
+      redirect_to action: 'index', page: @@current_page||=1
     else
       @astro_object=AstroObject.find(params[:id])
       if @astro_object.update(astro_object_params)
