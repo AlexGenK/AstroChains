@@ -13,12 +13,12 @@
 	<div class='form-group'>
 		<%= f.label :date, "Дата:", class: "control-label col-sm-2" %>
 		<div class="col-sm-2">
-			<%= f.date_field :date, class: "form-control" %>
+			<%= f.text_field :date, value: (@astro_object.date.strftime('%d/%m/%Y') if @astro_object.date), class: "form-control" %>
 		</div>
 
 		<%= f.label :time, "Время:", class: "control-label col-sm-1" %>
 		<div class="col-sm-2">
-			<%= f.time_field :time, class: "form-control" %>
+			<%= f.text_field :time, value: (@astro_object.time.strftime('%T') if @astro_object.time), class: "form-control" %>
 		</div>
 	</div>
 

@@ -3,7 +3,7 @@
 <h3><%= @astro_object.name %></h3>
 <p>
 	Дата: <%= @astro_object.date %><br>
-	Время: <%= @astro_object.time.strftime('%T') %><br>
+	Время: <%= @astro_object.time.strftime('%T') if @astro_object.time %><br>
 	Комментарий: <%= @astro_object.comment %>
 </p>
 <small><%= link_to ">>> Редактировать", edit_astro_object_path(@astro_object) %> | <%= link_to "Удалить <<<", astro_object_path(@astro_object), method: :delete, data: {confirm: "Вы уверены?"} %></small>

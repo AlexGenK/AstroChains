@@ -34,7 +34,7 @@
 					Дата: 
 				</div>
 				<div class='col-xs-12 col-md-9 col-lg-10'>
-					<%= item.date %>
+					<%= item.date.strftime('%d/%m/%Y') if item.date %>
 				</div>
 			</div>
 			<div class='row'>
@@ -42,7 +42,7 @@
 					Время: 
 				</div>
 				<div class='col-xs-12 col-md-9 col-lg-10'>
-					<%= item.time.strftime('%T') %><br>
+					<%= item.time.strftime('%T') if item.time %><br>
 				</div>
 			</div>
 			<div class='row'>
