@@ -1,26 +1,60 @@
 <!-- выводится объект -->
-<hr>
 <h3><%= @astro_object.name %></h3>
-<p>
-	Дата: <%= @astro_object.date %><br>
-	Время: <%= @astro_object.time.strftime('%T') if @astro_object.time %><br>
-	Комментарий: <%= @astro_object.comment %>
-</p>
-<small><%= link_to ">>> Редактировать", edit_astro_object_path(@astro_object) %> | <%= link_to "Удалить <<<", astro_object_path(@astro_object), method: :delete, data: {confirm: "Вы уверены?"} %></small>
+<div class='row'>
+	<div class='col-xs-12 col-sm-10'>
+		<div class='row'>
+			<div class='col-xs-12 col-sm-1'>
+				Дата: 
+			</div>
+			<div class='col-xs-12 col-sm-11'>
+				<%= @astro_object.date %><br>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='col-xs-12 col-sm-1'>
+				Время:
+			</div>
+			<div class='col-xs-12 col-sm-11'>
+				<%= @astro_object.time.strftime('%T') if @astro_object.time %><br>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='col-sm-12 col-md-1'>
+				Коммент:
+			</div>
+			<div class='col-sm-12 col-md-11'>
+				<%= @astro_object.comment %>
+			</div>
+		</div>
+	</div>
+	<div class='col-xs-12 col-sm-2'>
+		<p><%= link_to "Редактировать", edit_astro_object_path(@astro_object), class: "btn btn-default btn-block" %></p>
+		<p><%= link_to "Удалить", astro_object_path(@astro_object), method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-danger btn-block" %></p>
+	</div>
+</div>
 <hr>
 
 <!-- выводятся цепочки диспозиций, построенные для объекта -->
-<h3>Построенные цепочки</h3>
-<%= link_to ">>> Создать новую цепочку <<<", new_astro_object_chain_path(@astro_object) %>
+<h3>Построенные цепочки:</h3>
+<%= link_to "Создать новую цепочку", new_astro_object_chain_path(@astro_object), class: "btn btn-primary" %>
 <hr>
 <% @chains.each do |item| %>
-	<%= item.kind %>
-	<% if item.septener %>
-		по септенеру
-	<% end %>
-	<br>
-	<%= image_tag("graphs/#{item.id}.png") %>
-	<br>
-	<%= link_to ">>> Редактировать", edit_astro_object_chain_path(@astro_object, item) %> | <%= link_to "Удалить <<<", [@astro_object, item], method: :delete, data: {confirm: "Вы уверены?"} %>
+	<div class='row'>
+		<div class='col-xs-10'>
+			<h4>
+				<%= item.kind %>
+				<% if item.septener %>
+					по септенеру
+				<% end %>
+			</h4>
+			<br>
+			<%= image_tag("graphs/#{item.id}.png") %>
+			<br>
+		</div>
+		<div class='col-xs-2'>
+			<%= link_to "Редактировать", edit_astro_object_chain_path(@astro_object, item), class: "btn btn-default btn-block" %>
+			<%= link_to "Удалить", [@astro_object, item], method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-danger btn-block" %>
+		</div>
+	</div>
 	<hr>
 <% end %>
