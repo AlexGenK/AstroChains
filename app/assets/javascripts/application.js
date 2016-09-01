@@ -19,3 +19,7 @@
 //= require moment/ru
 //= require bootstrap-datetimepicker
 //= require_tree .
+
+$(function () {
+  $('.fancybox').fancybox({ parent: "body"});
+});
