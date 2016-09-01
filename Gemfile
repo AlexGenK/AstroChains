@@ -55,3 +55,5 @@ gem 'will_paginate-bootstrap'
 # datetime picker
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails'
+
+gem 'fancybox2-rails', '~> 0.2.8'

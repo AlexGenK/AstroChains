@@ -48,7 +48,7 @@
 			<% end %>
 		</h4>
 		<br>
-		<%= image_tag "graphs/#{item.id}.png", class: "img-responsive" %>
+		<a class="fancybox" href="<%= image_path "graphs/#{item.id}.png" %>" title ="<%= item.kind %>" rel="group"><%= image_tag("graphs/#{item.id}.png", class: "img-responsive") %></a>
 		<br>
 	<!-- это, блин, магия! если не слить в одной строке конец и начало div, ячейка не отцентрируется! -->
 	</div><div class='col-xs-2 vcenter'>
@@ -58,3 +58,9 @@
 </div>
 <hr>
 <% end %>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".fancybox").fancybox();
+	});
+</script>
