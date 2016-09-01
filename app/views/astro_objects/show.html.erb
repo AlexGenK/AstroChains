@@ -39,22 +39,22 @@
 <%= link_to "Создать новую цепочку", new_astro_object_chain_path(@astro_object), class: "btn btn-primary" %>
 <hr>
 <% @chains.each do |item| %>
-	<div class='row'>
-		<div class='col-xs-10'>
-			<h4>
-				<%= item.kind %>
-				<% if item.septener %>
-					по септенеру
-				<% end %>
-			</h4>
-			<br>
-			<%= image_tag("graphs/#{item.id}.png") %>
-			<br>
-		</div>
-		<div class='col-xs-2'>
-			<%= link_to "Редактировать", edit_astro_object_chain_path(@astro_object, item), class: "btn btn-default btn-block" %>
-			<%= link_to "Удалить", [@astro_object, item], method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-danger btn-block" %>
-		</div>
+<div class='row'>
+	<div class='col-xs-10 vcenter'>
+		<h4>
+			<%= item.kind %>
+			<% if item.septener %>
+				по септенеру
+			<% end %>
+		</h4>
+		<br>
+		<%= image_tag "graphs/#{item.id}.png", class: "img-responsive" %>
+		<br>
+	<!-- это, блин, магия! если не слить в одной строке конец и начало div, ячейка не отцентрируется! -->
+	</div><div class='col-xs-2 vcenter'>
+		<%= link_to "Редактировать", edit_astro_object_chain_path(@astro_object, item), class: "btn btn-default btn-block" %>
+		<%= link_to "Удалить", [@astro_object, item], method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-danger btn-block" %>
 	</div>
-	<hr>
+</div>
+<hr>
 <% end %>
