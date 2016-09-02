@@ -54,9 +54,9 @@ class AstroObjectsController < ApplicationController
 
   def destroy
 
-    # перед удалением объекта удаляются также все изображеня цепочек диспозиций этого объекта
+    # перед удалением объекта удаляются также все изображеня цепочек диспозиций этого объекта, если они существуют
     Chain.where(astro_object_id: params[:id]).each do |item|
-      File.delete("app/assets/images/graphs/#{item.id}.png")
+      File.delete("app/assets/images/graphs/#{item.id}.png") if File.exist?("app/assets/images/graphs/#{params[:id]}.png")
     end
     
     AstroObject.find(params[:id]).destroy

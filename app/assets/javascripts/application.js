@@ -21,5 +21,5 @@
 //= require_tree .
 
 $(function () {
-  $('.fancybox').fancybox({ parent: "body"});
+  	$('.fancybox').fancybox({ parent: "body"});
 });

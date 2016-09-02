@@ -30,8 +30,8 @@ class ChainsController < ApplicationController
 
   def destroy
     Chain.find(params[:id]).destroy
-    # после удаления цепочки удаляется и файл с ее визуализацией
-    File.delete("app/assets/images/graphs/#{params[:id]}.png")
+    # после удаления цепочки удаляется и файл с ее визуализацией, если он существует
+    File.delete("app/assets/images/graphs/#{params[:id]}.png") if File.exist?("app/assets/images/graphs/#{params[:id]}.png")
     redirect_to AstroObject.find(params[:astro_object_id])
   end
 

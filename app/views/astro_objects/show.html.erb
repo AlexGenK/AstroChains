@@ -48,7 +48,11 @@
 			<% end %>
 		</h4>
 		<br>
-		<a class="fancybox" href="<%= image_path "graphs/#{item.id}.png" %>" title ="<%= item.kind %>" rel="group"><%= image_tag("graphs/#{item.id}.png", class: "img-responsive") %></a>
+		<% if File.exist?("app/assets/images/graphs/#{item.id}.png") %>
+			<a class="fancybox" href="<%= image_path "graphs/#{item.id}.png" %>" title ="<%= item.kind %>" rel="group"><%= image_tag("graphs/#{item.id}.png", class: "img-responsive") %></a>
+		<% else %>
+			Изображение цепочки не найдено. Пересохраните цепочку.
+		<% end %>
 		<br>
 	<!-- это, блин, магия! если не слить в одной строке конец и начало div, ячейка не отцентрируется! -->
 	</div><div class='col-xs-2 vcenter'>
