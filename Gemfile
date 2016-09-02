@@ -56,4 +56,5 @@ gem 'will_paginate-bootstrap'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails'
 
+# отображение изображений в модальном окне
 gem 'fancybox2-rails', '~> 0.2.8'

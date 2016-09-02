@@ -25,3 +25,20 @@
        url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), 
        url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
+
+@font-face {
+    font-family: 'astro-semibold';
+    src: url('../assets/astro-semibold-webfont.eot');
+    src: url('../assets/astro-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../assets/astro-semibold-webfont.woff2') format('woff2'),
+         url('../assets/astro-semibold-webfont.woff') format('woff'),
+         url('../assets/astro-semibold-webfont.ttf') format('truetype'),
+         url('../assets/astro-semibold-webfont.svg#astro-semiboldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.astrofont {
+	font-family: 'astro-semibold';
+	src: url('../assets/astro_se.ttf') format('truetype');
+}
