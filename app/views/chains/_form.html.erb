@@ -18,7 +18,8 @@
 		<thead>
 			<tr>
 				<th></th>
-				<th>Ретроградность</th>
+				<th></th>
+				<th>R</th>
 				<th>Вес</th>
 				<th>Центр</th>
 				<th></th>
@@ -29,6 +30,7 @@
 			<% Chain::PLANETS.each do |planet|%>
 				<tr>
 					<td><%= planet[:planet_name]%></td>
+					<td><span class='astrofont'><%= planet[:planet_symbol]%></span></td>
 					<td><%= f.check_box "#{planet[:planet_prefix]}_retro".to_sym %></td>
 					<td><%= f.number_field "#{planet[:planet_prefix]}_weigth".to_sym %></td>
 					<td><%= f.select "#{planet[:planet_prefix]}_center".to_sym, [['нет', 0],
@@ -37,17 +39,18 @@
 																				['третий', 3]] %>
 					</td>
 					<td>---></td>
-					<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [['нет', 100],
-																				  ['Солнце', 0],
-																				  ['Луна', 1],
-																				  ['Меркурий', 2],
-																				  ['Венера', 3],
-																				  ['Марс', 4],
-																				  ['Юпитер', 5],
-																				  ['Сатурн', 6],
-																				  ['Уран', 7],
-																				  ['Нептун', 8],
-																				  ['Плутон', 9]]%>	
+					<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [['___', 100],
+																				  ['Q', 0],
+																				  ['R', 1],
+																				  ['S', 2],
+																				  ['T', 3],
+																				  ['U', 4],
+																				  ['V', 5],
+																				  ['W', 6],
+																				  ['X', 7],
+																				  ['Y', 8],
+																				  ['Z', 9]], 
+						{}, {class: "astrofont"} %>	
 					</td>			
 				</tr>
 			<% end %>

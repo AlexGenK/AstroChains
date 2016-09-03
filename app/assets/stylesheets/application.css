@@ -40,5 +40,5 @@
 
 .astrofont {
 	font-family: 'astro-semibold';
-	src: url('../assets/astro_se.ttf') format('truetype');
+  font-size: 175%;
 }
