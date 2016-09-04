@@ -1,79 +1,91 @@
-<%= form_for [@astro_object, @chain] do |f| %>
+<br>
 
-	<p>
-		<%= f.label :kind, 'Тип цепочки:' %>
-		<%= f.select :kind, ['По управлению', 
-							 'По экзальтации',
-							 'По падению',
-							 'По изгнанию'] %>
-	</p>
+<%= form_for [@astro_object, @chain], html: {class: "form-horizontal"} do |f| %>
 
-	<p>
-		<%= f.label :septener, 'По септенеру' %>
-		<%= f.check_box :septener %>
-	</p>
+	<div class="form-group">
+		<%= f.label :kind, 'Тип:', class: "control-label col-sm-1" %>
+		<div class="col-sm-2">
+			<%= f.select :kind, ['По управлению', 
+								 'По экзальтации',
+								 'По падению',
+								 'По изгнанию'], {}, {class: "form-control"} %>
+		</div>
+		<%= f.label :septener, 'Cептенер:', class: "control-label col-sm-1" %>
+		<div class="col-sm-2">
+			<%= f.check_box :septener, class: "checkbox" %>
+		</div>
+	</div>
 
-	<!-- свойства планет в цепочке организованы в таблицу -->
-	<table>
-		<thead>
-			<tr>
-				<th></th>
-				<th></th>
-				<th>R</th>
-				<th>Вес</th>
-				<th>Центр</th>
-				<th></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<% Chain::PLANETS.each do |planet|%>
-				<tr>
-					<td><%= planet[:planet_name]%></td>
-					<td><span class='astrofont'><%= planet[:planet_symbol]%></span></td>
-					<td><%= f.check_box "#{planet[:planet_prefix]}_retro".to_sym %></td>
-					<td><%= f.number_field "#{planet[:planet_prefix]}_weigth".to_sym %></td>
-					<td><%= f.select "#{planet[:planet_prefix]}_center".to_sym, [['нет', 0],
-																				['первый', 1],
-																				['второй', 2],
-																				['третий', 3]] %>
-					</td>
-					<td>---></td>
-					<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [['___', 100],
-																				  ['Q', 0],
-																				  ['R', 1],
-																				  ['S', 2],
-																				  ['T', 3],
-																				  ['U', 4],
-																				  ['V', 5],
-																				  ['W', 6],
-																				  ['X', 7],
-																				  ['Y', 8],
-																				  ['Z', 9]], 
-						{}, {class: "astrofont"} %>	
-					</td>			
-				</tr>
+	<div class="row">
+		<div class="col-sm-5">
+			<!-- свойства планет в цепочке организованы в таблицу -->
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th></th>
+						<th>R</th>
+						<th>Вес</th>
+						<th>Центр</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% Chain::PLANETS.each do |planet|%>
+						<tr>
+							<td><%= planet[:planet_name]%></td>
+							<td><span class='astrofont'><%= planet[:planet_symbol]%></span></td>
+							<td><%= f.check_box "#{planet[:planet_prefix]}_retro".to_sym, class: "checkbox" %></td>
+							<td><%= f.text_field "#{planet[:planet_prefix]}_weigth".to_sym, class: "form-control", style: "width: 50px;" %></td>
+							<td><%= f.select "#{planet[:planet_prefix]}_center".to_sym, [['нет', 0],
+																						['первый', 1],
+																						['второй', 2],
+																						['третий', 3]], {}, {class: "form-control"} %>
+							</td>
+							<td><span class="glyphicon glyphicon-arrow-right"></span></td>
+							<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [[' ', 100],
+																						  ['Q', 0],
+																						  ['R', 1],
+																						  ['S', 2],
+																						  ['T', 3],
+																						  ['U', 4],
+																						  ['V', 5],
+																						  ['W', 6],
+																						  ['X', 7],
+																						  ['Y', 8],
+																						  ['Z', 9]], 
+								{}, {class: "astrofont form-control"} %>	
+							</td>			
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<hr>
+			<p>
+				<%= f.submit 'Просмотреть', class: "btn btn-default" %>
+			</p>
+			<hr>
+		</div>
+		<div class="col-sm-7">
+			<!-- визуализация построенной цепочки -->
+			<% if !@preview_name.empty? %>
+				<br>
+				<%= image_tag("graphs/#{@preview_name}.png", class: "img-responsive") %>
 			<% end %>
-		</tbody>
-	</table>
-
-	<p>
-		<%= f.submit 'Просмотреть' %>
-	</p>
-
-	<!-- визуализация постренной цепочки -->
-	<% if !@preview_name.empty? %>
-		<br>
-		<%= image_tag("graphs/#{@preview_name}.png") %>
-	<% end %>
-
-	<p>
-		<%= f.label :comment, 'Комментарий:' %><br>
-		<%= f.text_area :comment %>
-	</p>
-
-	<p>
-		<%= f.submit 'Сохранить' %>
-	</p>
+		</div>
+	</div>
+	<div class="form-group">
+		<%= f.label :comment, 'Коммент:', class: "control-label col-sm-1" %>
+		<div class="col-sm-11">
+			<%= f.text_area :comment, class: "form-control", rows: "3" %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-offset-1 col-sm-1">
+			<%= f.submit 'Сохранить', class: "btn btn-primary" %>
+		</div>
+	</div>
+	<br>
 
 <% end %>

@@ -42,3 +42,9 @@
 	font-family: 'astro-semibold';
   font-size: 175%;
 }
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
