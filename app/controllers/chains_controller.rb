@@ -15,9 +15,13 @@ class ChainsController < ApplicationController
     # если в форме был нажата кнопка просмотра, то цепочка создается и визуализируется с именем 'preview', 
     # но не записывается и снова вводится форма создания цепочки.
     # в обратном случае цепочка записывается, визуализируется с именем-id объекта и выводится форма просмотра
-    # объекта к котрому принадлежит цепочка
-    if params[:commit]=='Просмотреть'
+    # объекта к которому принадлежит цепочка
+    if (params[:commit]=='Просмотреть')||(params[:commit]=='Сбросить')
       @preview_name='preview'
+      if params[:commit]=='Сбросить'
+        reset_params! params
+        @chain.reset
+      end
       Chain.graph_create(chain_params, @preview_name)
       render action: 'new'
     else
@@ -49,7 +53,11 @@ class ChainsController < ApplicationController
     # если в форме был нажата кнопка просмотра, то цепочка меняется, визуализируется с именем-id цепочки, 
     # и снова вводится форма редактирования цепочки.
     # в обратном случае происходит то же самое, но выводится форма просмотра объекта к котрому принадлежит цепочка
-    if params[:commit]=='Просмотреть'
+    if (params[:commit]=='Просмотреть')||(params[:commit]=='Сбросить')
+      if params[:commit]=='Сбросить'
+        reset_params! params
+        Chain.graph_create(chain_params, @preview_name)
+      end
       @chain.update(chain_params)
       render action: 'edit'
     else
@@ -77,4 +85,13 @@ class ChainsController < ApplicationController
                                                                               :plu_retro, :plu_weigth, :plu_center, :plu_relation)
   end
   
+  def reset_params! params
+    Chain::PLANETS.each do |item|
+      params[:chain]["#{item[:planet_prefix]}_retro"]="0"
+      params[:chain]["#{item[:planet_prefix]}_weigth"]=nil
+      params[:chain]["#{item[:planet_prefix]}_center"]="0"
+      params[:chain]["#{item[:planet_prefix]}_relation"]="100"
+    end
+  end
+
 end

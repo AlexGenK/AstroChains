@@ -86,4 +86,13 @@ class Chain < ActiveRecord::Base
     g.output(:png => "app/assets/images/graphs/#{image_name}.png")
   end
 
+  def reset
+    PLANETS.each do |item|
+      self.send("#{item[:planet_prefix]}_retro=", false)
+      self.send("#{item[:planet_prefix]}_weigth=", nil)
+      self.send("#{item[:planet_prefix]}_center=", 0)
+      self.send("#{item[:planet_prefix]}_relation=", 100)
+    end
+  end
+
 end
