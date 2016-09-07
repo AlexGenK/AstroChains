@@ -11,17 +11,20 @@ class ChainsController < ApplicationController
   def create
     @astro_object=AstroObject.find(params[:astro_object_id])
     @chain=@astro_object.chains.new(chain_params)
-    @chain.code=params.to_s #<<<<<<<<<<<<<<<<<<<<------------------!!!!
+    @chain.code=params.to_s #<<<<<<<<<<<<<<<<<<<<------------------запись отладочной информации
+    # клонируем хеш параметров, чтобы впоследствии его можно было изменить
     edited_params=chain_params.clone
-    # если в форме был нажата кнопка просмотра, то цепочка создается и визуализируется с именем 'preview', 
+    # если в форме был нажата кнопка просмотра или сброса, то цепочка создается, визуализируется с именем 'preview', 
     # но не записывается и снова вводится форма создания цепочки.
     # в обратном случае цепочка записывается, визуализируется с именем-id объекта и выводится форма просмотра
     # объекта к которому принадлежит цепочка
     if (params[:commit]=='Просмотреть')||(params[:commit]=='Сбросить')
       @preview_name='preview'
+      # если была нажата кнопка Сбросить, то сбрасываем хэш параметров к исходным значениям
       if params[:commit]=='Сбросить'
         reset_params! edited_params
       end
+      # меняем атрибуты цепочки без ее записи и визуализируем ее
       @chain.assign_attributes(edited_params)
       Chain.graph_create(edited_params, @preview_name)
       render action: 'new'
@@ -51,15 +54,19 @@ class ChainsController < ApplicationController
     @chain=Chain.find(params[:id])
     @preview_name='preview'
     Chain.graph_create(chain_params, @preview_name)
+    # клонируем хеш параметров, чтобы впоследствии его можно было изменить
     edited_params=chain_params.clone
-    # если в форме был нажата кнопка просмотра, то цепочка меняется, визуализируется с именем-id цепочки, 
-    # и снова вводится форма редактирования цепочки.
-    # в обратном случае происходит то же самое, но выводится форма просмотра объекта к котрому принадлежит цепочка
+    # если в форме был нажата кнопка просмотра или сброса, то цепочка меняется, визуализируется с именем-id цепочки, 
+    # но не записывается и снова вводится форма редактирования цепочки.
+    # в обратном случае происходит то же самое, но цепочка сохраняется и выводится форма просмотра объекта 
+    # к которому принадлежит цепочка
     if (params[:commit]=='Просмотреть')||(params[:commit]=='Сбросить')
+      # если была нажата кнопка Сбросить, то сбрасываем хэш параметров к исходным значениям
       if params[:commit]=='Сбросить'
         reset_params! edited_params
         Chain.graph_create(edited_params, @preview_name)
       end
+      # меняем атрибуты цепочки без ее записи
       @chain.assign_attributes(edited_params)
       render action: 'edit'
     else
@@ -89,6 +96,7 @@ class ChainsController < ApplicationController
                                                                               :plu_retro, :plu_weigth, :plu_center, :plu_relation)
   end
 
+  # сброс хэша параметров цепочки к исходным значениям
   def reset_params! params
     Chain::PLANETS.each do |item|
       params["#{item[:planet_prefix]}_retro"]="0"

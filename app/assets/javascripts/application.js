@@ -21,6 +21,7 @@
 //= require bootstrap-datetimepicker
 //= require_tree .
 
+// изображения в модальном окне
 $(function () {
   	$('.fancybox').fancybox({ parent: "body"});
 });

@@ -1,7 +1,9 @@
+<!-- форма со свойствами цепочки -->
 <br>
 
 <%= form_for [@astro_object, @chain], html: {class: "form-horizontal"} do |f| %>
 
+	<!-- общие свойства -->
 	<div class="form-group">
 		<%= f.label :kind, 'Тип:', class: "control-label col-sm-1" %>
 		<div class="col-sm-2">
@@ -66,8 +68,8 @@
 			<%= f.submit 'Сбросить', class: "btn btn-default" %>
 			<hr>
 		</div>
+		<!-- визуализация построенной цепочки -->
 		<div class="col-sm-7">
-			<!-- визуализация построенной цепочки -->
 			<% if !@preview_name.empty? %>
 				<br>
 				<%= image_tag("graphs/#{@preview_name}.png", class: "img-responsive") %>
@@ -90,6 +92,7 @@
 
 <% end %>
 
+<!-- пикер для ввода цифр -->
 <script type="text/javascript">
 	$("input[name='chain[sun_weigth]']").TouchSpin({
       verticalbuttons: true,

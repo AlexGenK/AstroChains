@@ -10,6 +10,7 @@ class AstroObjectsController < ApplicationController
     else
       @astro_objects=AstroObject.paginate(:page=>params[:page]).order(:name)
     end
+    # запоминаем текущую страницу в глобальной переменной
     @@current_page=params[:page]
   end
 
@@ -18,6 +19,8 @@ class AstroObjectsController < ApplicationController
   end
 
   def create
+    # если при создании объекта была нажата кнопка Отменить, то возвращаемся на текущую страницу индекса.
+    # иначе сохраняем созданный объект
     if params[:commit]=="Отменить"
       redirect_to action: 'index', page: @@current_page||=1
     else
@@ -40,6 +43,8 @@ class AstroObjectsController < ApplicationController
   end
 
   def update
+    # если при редактировании объекта была нажата кнопка Отменить, то возвращаемся на текущую страницу индекса.
+    # иначе сохраняем ищмененный объект
     if params[:commit]=="Отменить"
       redirect_to action: 'index', page: @@current_page||=1
     else

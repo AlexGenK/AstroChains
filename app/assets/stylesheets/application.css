@@ -18,6 +18,7 @@
  *= require_self
  */
 
+/* шрифт - иконки */
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../assets/glyphicons-halflings-regular.eot');
@@ -27,6 +28,7 @@
        url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
+/* шрифт с астрологическими символами */
 @font-face {
     font-family: 'astro-semibold';
     src: url('../assets/astro-semibold-webfont.eot');
@@ -39,11 +41,13 @@
     font-style: normal;
 }
 
+/* отображение содержимого шрифтом с астрологическими символами */
 .astrofont {
 	font-family: 'astro-semibold';
   font-size: 175%;
 }
 
+/* центрирование содержимого ячейки grid system по вертикали */
 .vcenter {
     display: inline-block;
     vertical-align: middle;

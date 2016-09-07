@@ -48,6 +48,7 @@
 			<% end %>
 		</h4>
 		<br>
+		<!-- файл визуализации графа выводится только если он существует. иначе предлагается пересохранить цепочку -->
 		<% if File.exist?("app/assets/images/graphs/#{item.id}.png") %>
 			<a class="fancybox" href="<%= image_path "graphs/#{item.id}.png" %>" title ="<%= item.kind %>" rel="group"><%= image_tag("graphs/#{item.id}.png", class: "img-responsive") %></a>
 		<% else %>
