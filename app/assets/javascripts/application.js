@@ -19,6 +19,7 @@
 //= require moment
 //= require moment/ru
 //= require bootstrap-datetimepicker
+//= require bootstrap-select.min
 //= require_tree .
 
 // изображения в модальном окне

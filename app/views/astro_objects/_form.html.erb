@@ -19,6 +19,11 @@
 		<div class="col-sm-2">
 			<%= f.text_field :time, value: (@astro_object.time.strftime('%T') if @astro_object.time), class: "form-control" %>
 		</div>
+
+		<%= label_tag :library, "Входит в библиотеки:", class: "control-label col-sm-2" %>
+		<div class="col-sm-3">
+			<%= select_tag :library, options_from_collection_for_select(@taglist, "name", "name", @astro_object.tag_list), {class: "selectpicker form-control", multiple: true} %>
+		</div>
 	</div>
 
 	<div class='form-group'>
@@ -50,5 +55,8 @@
             locale: 'ru',
             format: 'LT'
         });
+        $('.selectpicker').selectpicker({
+  			size: 5
+		});
     });
 </script>

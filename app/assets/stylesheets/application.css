@@ -14,6 +14,7 @@
  *= require bootstrap-datetimepicker
  *= require fancybox
  *= require jquery.bootstrap-touchspin.min
+ *= require bootstrap-select.min
  *= require_tree .
  *= require_self
  */

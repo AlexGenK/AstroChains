@@ -4,6 +4,10 @@ class AstroObjectsController < ApplicationController
   def index
     @taglist=ActsAsTaggableOn::Tag.all
     params[:search]='' if params[:commit]=='Показать все'
+    # текущая библиотека сохраняется в сессии
+    params[:library]=session[:library] if ( !params[:library] ) && session[:library]
+    params[:library]="" if ( !params[:library] ) && ( !session[:library] )
+    session[:library]=params[:library]
     # если передана подстрока поиска то выводятся лишь те объекты, в названии которых существует данная подстрока
     # как в капитализированном, так и в обычном виде
     if params[:search]
@@ -48,6 +52,7 @@ class AstroObjectsController < ApplicationController
   end
 
   def edit
+    @taglist=ActsAsTaggableOn::Tag.all
     @astro_object=AstroObject.find(params[:id])
   end
 
@@ -58,9 +63,11 @@ class AstroObjectsController < ApplicationController
       redirect_to action: 'index', page: @@current_page||=1
     else
       @astro_object=AstroObject.find(params[:id])
-      if params[:commit]=="Tag"
-        @astro_object.tag_list.add "tagged"
+      all_tag=ActsAsTaggableOn::Tag.all
+      all_tag.each do |item|
+        @astro_object.tag_list.remove item.name
       end
+      @astro_object.tag_list.add params[:library]
       if @astro_object.update(astro_object_params)
         redirect_to @astro_object
       else
@@ -86,6 +93,5 @@ class AstroObjectsController < ApplicationController
   def astro_object_params
     params.require(:astro_object).permit(:name, :date, :time, :comment, :tag_list)
   end
-
 
 end
