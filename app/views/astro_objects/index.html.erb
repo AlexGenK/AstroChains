@@ -1,18 +1,25 @@
 <h1>Список объектов</h1>
 
 <!-- форма поиска -->
-<div class='row'>
-	<div class='col-xs-6'>	
+<div class='row'>	
 		<%= form_tag(astro_objects_path, :method => "get", id: "search-form") do %>
-			<div class='input-group'>
-				<%= text_field_tag :search, params[:search], placeholder: "Наименование", class: "form-control" %>
-				<span class='input-group-btn'>
-					<%= submit_tag "Найти", class: "btn btn-default" %>
-					<%= submit_tag "Показать все", class: "btn btn-default" %>
-				</span>
+			<div class='col-xs-6'>
+				<div class='input-group'>
+				<%= label_tag :library, 'Библиотека:', class: "input-group-addon"%>
+				<%= select_tag :library, options_from_collection_for_select(@taglist, "name", "name",  params[:library]), include_blank: 'Все', class: "form-control" %>
 			</div>
+			</div>
+			<div class='col-xs-6'>
+				<div class='input-group'>
+					<%= text_field_tag :search, params[:search], placeholder: "Наименование объекта", class: "form-control" %>
+					<span class='input-group-btn'>
+						<%= submit_tag "Найти", class: "btn btn-default" %>
+						<%= submit_tag "Показать все", class: "btn btn-default" %>
+					</span>
+				</div>
+			</div>
+
 		<% end %>
-	</div>
 </div>
 <br>
 

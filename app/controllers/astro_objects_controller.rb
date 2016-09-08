@@ -2,13 +2,22 @@
 class AstroObjectsController < ApplicationController
 
   def index
+    @taglist=ActsAsTaggableOn::Tag.all
     params[:search]='' if params[:commit]=='Показать все'
     # если передана подстрока поиска то выводятся лишь те объекты, в названии которых существует данная подстрока
     # как в капитализированном, так и в обычном виде
     if params[:search]
-      @astro_objects=AstroObject.where('name LIKE ? OR name LIKE ?', "%#{params[:search].mb_chars.capitalize.to_s}%", "%#{params[:search].mb_chars.downcase.to_s}%").paginate(:page=>params[:page]).order(:name)
+      if params[:library]==""
+        @astro_objects=AstroObject.where('name LIKE ? OR name LIKE ?', "%#{params[:search].mb_chars.capitalize.to_s}%", "%#{params[:search].mb_chars.downcase.to_s}%").paginate(:page=>params[:page]).order(:name)
+      else
+        @astro_objects=AstroObject.tagged_with(params[:library]).where('name LIKE ? OR name LIKE ?', "%#{params[:search].mb_chars.capitalize.to_s}%", "%#{params[:search].mb_chars.downcase.to_s}%").paginate(:page=>params[:page]).order(:name)
+      end
     else
-      @astro_objects=AstroObject.paginate(:page=>params[:page]).order(:name)
+      if params[:library]==""
+        @astro_objects=AstroObject.paginate(:page=>params[:page]).order(:name)
+      else
+        @astro_objects=AstroObject.tagged_with(params[:library]).paginate(:page=>params[:page]).order(:name)
+      end
     end
     # запоминаем текущую страницу в глобальной переменной
     @@current_page=params[:page]
@@ -49,6 +58,9 @@ class AstroObjectsController < ApplicationController
       redirect_to action: 'index', page: @@current_page||=1
     else
       @astro_object=AstroObject.find(params[:id])
+      if params[:commit]=="Tag"
+        @astro_object.tag_list.add "tagged"
+      end
       if @astro_object.update(astro_object_params)
         redirect_to @astro_object
       else
@@ -72,7 +84,7 @@ class AstroObjectsController < ApplicationController
 
   # разрешение передачи параметров
   def astro_object_params
-    params.require(:astro_object).permit(:name, :date, :time, :comment)
+    params.require(:astro_object).permit(:name, :date, :time, :comment, :tag_list)
   end
 
 

@@ -1,0 +1,12 @@
+<h1>Управление библиотеками</h1>
+<br>
+<h3>Доступные библиотеки:</h3>
+<% @tags.each do |item| %>
+	<%= item.name %> -> <%= item.taggings_count %> элементов
+	<br>
+<% end %>
+<br>
+<%= form_tag '/libraries' do %>
+	<%= text_field_tag :addlib, params[:addlib], placeholder: "Наименование" %>
+	<%= submit_tag "Добавить", class: "btn btn-default" %>
+<% end %>
