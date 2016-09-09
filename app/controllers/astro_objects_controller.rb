@@ -58,7 +58,7 @@ class AstroObjectsController < ApplicationController
 
   def update
     # если при редактировании объекта была нажата кнопка Отменить, то возвращаемся на текущую страницу индекса.
-    # иначе сохраняем ищмененный объект
+    # иначе сохраняем иpмененный объект
     if params[:commit]=="Отменить"
       redirect_to action: 'index', page: @@current_page||=1
     else
@@ -69,7 +69,7 @@ class AstroObjectsController < ApplicationController
       end
       @astro_object.tag_list.add params[:library]
       if @astro_object.update(astro_object_params)
-        redirect_to @astro_object
+        redirect_to action: 'index', page: @@current_page||=1
       else
         render action: 'edit'
       end

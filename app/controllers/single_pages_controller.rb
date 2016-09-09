@@ -8,7 +8,7 @@ class SinglePagesController < ApplicationController
   end
 
   def addlibraries
-    @tag=ActsAsTaggableOn::Tag.new(:name=>params[:addlib])
+    @tag=ActsAsTaggableOn::Tag.new(:name=>params[:addlib].mb_chars.downcase)
     @tag.save
     redirect_to '/libraries'
   end
