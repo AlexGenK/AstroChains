@@ -12,4 +12,10 @@ class SinglePagesController < ApplicationController
     @tag.save
     redirect_to '/libraries'
   end
+
+  def dellibraries
+    @t=ActsAsTaggableOn::Tag.where('taggings_count=0').delete_all
+    redirect_to '/libraries'
+  end
+
 end
