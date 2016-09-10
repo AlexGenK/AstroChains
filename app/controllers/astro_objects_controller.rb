@@ -28,6 +28,7 @@ class AstroObjectsController < ApplicationController
   end
 
   def new
+    @taglist=ActsAsTaggableOn::Tag.all
     @astro_object=AstroObject.new
   end
 
@@ -38,6 +39,11 @@ class AstroObjectsController < ApplicationController
       redirect_to action: 'index', page: @@current_page||=1
     else
       @astro_object=AstroObject.new(astro_object_params)
+      if params[:library] 
+        @astro_object.tag_list = params[:library].join(',')
+      else
+        @astro_object.tag_list = ''
+      end
       if @astro_object.save
         redirect_to astro_objects_path
       else
@@ -63,11 +69,11 @@ class AstroObjectsController < ApplicationController
       redirect_to action: 'index', page: @@current_page||=1
     else
       @astro_object=AstroObject.find(params[:id])
-      all_tag=ActsAsTaggableOn::Tag.all
-      all_tag.each do |item|
-        @astro_object.tag_list.remove item.name
+      if params[:library] 
+        @astro_object.tag_list = params[:library].join(',')
+      else
+        @astro_object.tag_list = ''
       end
-      @astro_object.tag_list.add params[:library]
       if @astro_object.update(astro_object_params)
         redirect_to action: 'index', page: @@current_page||=1
       else
