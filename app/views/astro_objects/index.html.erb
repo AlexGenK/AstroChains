@@ -60,6 +60,16 @@
 					<%= item.comment %>
 				</div>
 			</div>
+			<div class='row'>
+				<div class='col-xs-12 col-md-3 col-lg-2'>
+					Библиотеки: 
+				</div>
+				<div class='col-xs-12 col-md-9 col-lg-10'>
+					<% item.tag_list.sort.each do |tag| %>
+						<span class="label label-primary"><%= tag %></span>
+					<% end %>
+				</div>
+			</div>
 		</div>
 		<div class='col-xs-12 col-sm-2'>
 			<p><%= link_to "Редактировать", edit_astro_object_path(item), class: "btn btn-default btn-block" %></p>

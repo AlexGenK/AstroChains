@@ -2,7 +2,7 @@
 class AstroObjectsController < ApplicationController
 
   def index
-    @taglist=ActsAsTaggableOn::Tag.all
+    @taglist=ActsAsTaggableOn::Tag.all.order(:name)
     params[:search]='' if params[:commit]=='Показать все'
     # текущая библиотека сохраняется в сессии
     params[:library]=session[:library] if ( !params[:library] ) && session[:library]
@@ -28,7 +28,7 @@ class AstroObjectsController < ApplicationController
   end
 
   def new
-    @taglist=ActsAsTaggableOn::Tag.all
+    @taglist=ActsAsTaggableOn::Tag.all.order(:name)
     @astro_object=AstroObject.new
   end
 
@@ -54,11 +54,12 @@ class AstroObjectsController < ApplicationController
 
   def show
     @astro_object=AstroObject.find(params[:id])
+    @taglist=@astro_object.tag_list.sort
     @chains=@astro_object.chains.all
   end
 
   def edit
-    @taglist=ActsAsTaggableOn::Tag.all
+    @taglist=ActsAsTaggableOn::Tag.all.order(:name)
     @astro_object=AstroObject.find(params[:id])
   end
 

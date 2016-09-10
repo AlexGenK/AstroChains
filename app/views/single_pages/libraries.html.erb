@@ -7,7 +7,7 @@
 <br>
 <%= form_tag '/libraries' do %>
 	<%= text_field_tag :addlib, params[:addlib], placeholder: "Наименование" %>
-	<%= submit_tag "Добавить", class: "btn btn-default" %><br>
+	<%= submit_tag "Добавить", class: "btn btn-default" %>
 <% end %>
 <%= form_tag '/libraries', method: "delete" do %>
 	<%= submit_tag "Удалить пустые", class: "btn btn-default" %>
