@@ -47,6 +47,8 @@ class AstroObjectsController < ApplicationController
       if @astro_object.save
         redirect_to astro_objects_path
       else
+        flash[:alert]="Имя объекта не должно быть пустым"
+        @taglist=ActsAsTaggableOn::Tag.all.order(:name)
         render action: 'new'
       end
     end

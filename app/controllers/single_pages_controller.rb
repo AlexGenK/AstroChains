@@ -9,7 +9,7 @@ class SinglePagesController < ApplicationController
 
   def addlibraries
     @tag=ActsAsTaggableOn::Tag.new(:name=>params[:addlib].mb_chars.downcase)
-    @tag.save
+    flash[:alert]='Вы ввели недопустимое имя для библиотеки.' unless @tag.save
     redirect_to '/libraries'
   end
 
