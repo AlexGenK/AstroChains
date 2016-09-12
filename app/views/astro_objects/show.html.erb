@@ -65,6 +65,14 @@
 			Изображение цепочки не найдено. Пересохраните цепочку.
 		<% end %>
 		<br>
+		<div class='row'>
+			<div class='col-xs-2'>
+				Комментарий:
+			</div>
+			<div class='col-xs-10'>
+				<%= item.comment %>
+			</div>
+		</div>
 	<!-- это, блин, магия! если не слить в одной строке конец и начало div, ячейка не отцентрируется! -->
 	</div><div class='col-xs-2 vcenter'>
 		<%= link_to "Редактировать", edit_astro_object_chain_path(@astro_object, item), class: "btn btn-default btn-block" %>
