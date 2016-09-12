@@ -19,7 +19,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-sm-5">
+		<div class="col-sm-5 vcenter">
 			<!-- свойства планет в цепочке организованы в таблицу -->
 			<table class="table table-striped">
 				<thead>
@@ -41,9 +41,9 @@
 							<td><%= f.check_box "#{planet[:planet_prefix]}_retro".to_sym, class: "checkbox" %></td>
 							<td><%= f.text_field "#{planet[:planet_prefix]}_weigth".to_sym, class: "form-control", style: "width: 50px;" %></td>
 							<td><%= f.select "#{planet[:planet_prefix]}_center".to_sym, [['нет', 0],
-																						['первый', 1],
-																						['второй', 2],
-																						['третий', 3]], {}, {class: "form-control"} %>
+																						['один', 1],
+																						['два', 2],
+																						['три', 3]], {}, {class: "form-control"} %>
 							</td>
 							<td><span class="glyphicon glyphicon-arrow-right"></span></td>
 							<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [[' ', 100],
@@ -67,12 +67,11 @@
 			<%= f.submit 'Просмотреть', class: "btn btn-default" %>
 			<%= f.submit 'Сбросить', class: "btn btn-default" %>
 			<hr>
-		</div>
+		</div><div class="col-sm-7 vcenter">
 		<!-- визуализация построенной цепочки -->
-		<div class="col-sm-7">
 			<% if !@preview_name.empty? %>
-				<br>
-				<%= image_tag("graphs/#{@preview_name}.png", class: "img-responsive") %>
+				<a class="fancybox" href='<%= image_path "graphs/#{@preview_name}.png" %>' title ="Цепочка диспозиций" rel="group"><%= image_tag("graphs/#{@preview_name}.png", class: "img-responsive") %></a>
+				
 			<% end %>
 		</div>
 	</div>
