@@ -11,7 +11,13 @@ class ChainsController < ApplicationController
   def create
     @astro_object=AstroObject.find(params[:astro_object_id])
     @chain=@astro_object.chains.new(chain_params)
-    @chain.code=params.to_s #<<<<<<<<<<<<<<<<<<<<------------------запись отладочной информации
+    @preview_name=''
+    if (chain_params[:septener]=='1') && (!Chain.septener?(chain_params))
+      flash[:alert]="Цепочка составлена не по септенеру. Перегенерируйте цепочку."
+      render action: 'new'
+      return
+    end
+    # @chain.code=params.to_s <<<<<<<<<<<<<<<<<<<<------------------запись отладочной информации
     # клонируем хеш параметров, чтобы впоследствии его можно было изменить
     edited_params=chain_params.clone
     # если в форме был нажата кнопка просмотра или сброса, то цепочка создается, визуализируется с именем 'preview', 
@@ -53,9 +59,16 @@ class ChainsController < ApplicationController
     @astro_object=AstroObject.find(params[:astro_object_id])
     @chain=Chain.find(params[:id])
     @preview_name='preview'
-    Chain.graph_create(chain_params, @preview_name)
     # клонируем хеш параметров, чтобы впоследствии его можно было изменить
     edited_params=chain_params.clone
+    # меняем атрибуты цепочки без ее записи
+    @chain.assign_attributes(edited_params)
+    if (chain_params[:septener]=='1') && (!Chain.septener?(chain_params))
+      flash[:alert]="Цепочка составлена не по септенеру. Перегенерируйте цепочку."
+      render action: 'edit'
+      return
+    end
+    Chain.graph_create(chain_params, @preview_name)
     # если в форме был нажата кнопка просмотра или сброса, то цепочка меняется, визуализируется с именем-id цепочки, 
     # но не записывается и снова вводится форма редактирования цепочки.
     # в обратном случае происходит то же самое, но цепочка сохраняется и выводится форма просмотра объекта 
