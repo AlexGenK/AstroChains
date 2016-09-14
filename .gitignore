@@ -16,3 +16,4 @@
 !/log/.keep
 /tmp
 /app/assets/images/graphs/*
+!/app/assets/images/graphs/.keep
