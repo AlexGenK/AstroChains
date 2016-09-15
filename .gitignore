@@ -16,4 +16,5 @@
 !/log/.keep
 /tmp
 /app/assets/images/graphs/*
+/public/images/chaingraphs/*
 !/app/assets/images/graphs/.keep

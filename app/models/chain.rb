@@ -83,7 +83,7 @@ class Chain < ActiveRecord::Base
     end
     
     # собственно визуализация графа в файл
-    g.output(:png => "app/assets/images/graphs/#{image_name}.png")
+    g.output(:png => "public/images/chaingraphs/#{image_name}.png")
   end
 
   # метод, принмает хэш с параметрами цепочки и определяет соответсвует ли он параметрам по септенеру

@@ -82,10 +82,10 @@
 			<hr>
 		</div><div class="col-sm-7 vcenter">
 		<!-- визуализация построенной цепочки -->
-			<% if !@preview_name.empty? %>
-				<a class="fancybox" href='<%= image_path "graphs/#{@preview_name}.png" %>' title ="Цепочка диспозиций" rel="group"><%= image_tag("graphs/#{@preview_name}.png", class: "img-responsive") %></a>
+		<% if !@preview_name.empty? %>
+				<a class="fancybox" href='<%= image_path("chaingraphs/#{@preview_name}.png") %>' title ="Цепочка диспозиций" rel="group"><%= image_tag("chaingraphs/#{@preview_name}.png", class: "img-responsive") %></a>
 				
-			<% end %>
+		<% end %>
 		</div>
 	</div>
 	<div class="form-group">
