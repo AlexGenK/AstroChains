@@ -83,7 +83,7 @@
 		</div><div class="col-sm-7 vcenter">
 		<!-- визуализация построенной цепочки -->
 		<% if !@preview_name.empty? %>
-				<a class="fancybox" href='<%= image_path("chaingraphs/#{@preview_name}.png") %>' title ="Цепочка диспозиций" rel="group"><%= image_tag("chaingraphs/#{@preview_name}.png", class: "img-responsive") %></a>
+				<a class="fancybox" href='<%= image_path("chaingraphs/#{@preview_name}.png?#{Time.now.to_i}") %>' title ="Цепочка диспозиций" rel="group"><%= image_tag("chaingraphs/#{@preview_name}.png?#{Time.now.to_i}", class: "img-responsive") %></a>
 				
 		<% end %>
 		</div>
