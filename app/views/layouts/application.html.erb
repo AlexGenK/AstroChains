@@ -19,7 +19,8 @@
   <meta name="theme-color" content="#ffffff">
 
 </head>
-<body class="container">
+<body>
+  <div class="container">
   <!-- навигация -->
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -44,10 +45,14 @@
       </div> <!--/.navbar-collapse -->
     </div>
   </nav>
-  <br>
-  <br>
 
   <%= yield %>
-  
+
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted"><span class="glyphicon glyphicon-copyright-mark"></span> 2016 Oleksii Kozhyn</p>
+    </div>
+  </footer>
 </body>
 </html>
