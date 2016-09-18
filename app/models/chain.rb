@@ -21,27 +21,39 @@ class Chain < ActiveRecord::Base
   # цепочки (в соответствии с моделью) и имя файла в который будет производится визуализация
   def self.graph_create(chain_params, image_name)
 
-    # создается объект-направленный граф с тремя кластерами
-    g = GraphViz::new( "G", "rankdir" => "LR" )
+    # создается объект-направленный граф с шестью кластерами (dot, fdp, neato)
+    g = GraphViz::new( "G", "rankdir" => "LR", :use=>"dot" )
     graph_nodes=[]
-    c1=g.add_graph("cluster1")
-    c1["color"]="red"
-    c2=g.add_graph("cluster2")
-    c2["color"]="red"
-    c3=g.add_graph("cluster3")
-    c3["color"]="red"
-    c4=g.add_graph("cluster4")
-    c4["color"]="red"
-    c5=g.add_graph("cluster5")
-    c5["color"]="red"
-    c6=g.add_graph("cluster6")
-    c6["color"]="red"
-
+    
     # если цепочка строится по септенеру, количесвто планет ограничивается семью. иначе - девять
     if chain_params[:septener]=='1'
       end_planet=6
     else
       end_planet=9
+    end
+
+    0.upto end_planet do |i|
+      pl_center=chain_params["#{PLANETS[i][:planet_prefix]}_center"]
+      case pl_center
+      when '1'
+        @c1=g.add_graph("cluster1")
+        @c1["color"]="red"
+      when '2'
+        @c2=g.add_graph("cluster2")
+        @c2["color"]="red"
+      when '3'
+        @c3=g.add_graph("cluster3")
+        @c3["color"]="red"
+      when '4'
+        @c4=g.add_graph("cluster4")
+        @c4["color"]="red"
+      when '5'
+        @c5=g.add_graph("cluster5")
+        @c5["color"]="red"
+      when '6'
+        @c6=g.add_graph("cluster6")
+        @c6["color"]="red"
+      end
     end
 
     # проходим цикл по всем планетам для формирования узлов графа
@@ -72,17 +84,17 @@ class Chain < ActiveRecord::Base
       when '0'
         graph_nodes[i]=g.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       when '1'
-        graph_nodes[i]=c1.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+        graph_nodes[i]=@c1.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       when '2'
-        graph_nodes[i]=c2.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+        graph_nodes[i]=@c2.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       when '3'
-        graph_nodes[i]=c3.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+        graph_nodes[i]=@c3.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       when '4'
-        graph_nodes[i]=c4.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+        graph_nodes[i]=@c4.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       when '5'
-        graph_nodes[i]=c5.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")   
+        graph_nodes[i]=@c5.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")   
       else
-        graph_nodes[i]=c6.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+        graph_nodes[i]=@c6.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       end
     end
 
