@@ -54,9 +54,12 @@
 							<td><%= f.check_box "#{planet[:planet_prefix]}_retro".to_sym, class: "checkbox" %></td>
 							<td><%= f.text_field "#{planet[:planet_prefix]}_weigth".to_sym, class: "form-control", style: "width: 50px;" %></td>
 							<td><%= f.select "#{planet[:planet_prefix]}_center".to_sym, [['нет', 0],
-																						['один', 1],
-																						['два', 2],
-																						['три', 3]], {}, {class: "form-control"} %>
+																						['1', 1],
+																						['2', 2],
+																						['3', 3],
+																						['4', 4],
+																						['5', 5],
+																						['6', 6]], {}, {class: "form-control"} %>
 							</td>
 							<td><span class="glyphicon glyphicon-arrow-right"></span></td>
 							<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [[' ', 100],

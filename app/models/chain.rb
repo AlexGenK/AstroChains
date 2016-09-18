@@ -30,6 +30,12 @@ class Chain < ActiveRecord::Base
     c2["color"]="red"
     c3=g.add_graph("cluster3")
     c3["color"]="red"
+    c4=g.add_graph("cluster4")
+    c4["color"]="red"
+    c5=g.add_graph("cluster5")
+    c5["color"]="red"
+    c6=g.add_graph("cluster6")
+    c6["color"]="red"
 
     # если цепочка строится по септенеру, количесвто планет ограничивается семью. иначе - девять
     if chain_params[:septener]=='1'
@@ -69,8 +75,14 @@ class Chain < ActiveRecord::Base
         graph_nodes[i]=c1.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       when '2'
         graph_nodes[i]=c2.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
-      else
+      when '3'
         graph_nodes[i]=c3.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+      when '4'
+        graph_nodes[i]=c4.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+      when '5'
+        graph_nodes[i]=c5.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")   
+      else
+        graph_nodes[i]=c6.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       end
     end
 
