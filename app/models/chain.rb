@@ -22,7 +22,7 @@ class Chain < ActiveRecord::Base
   def self.graph_create(chain_params, image_name)
 
     # создается объект-направленный граф с шестью кластерами (dot, fdp, neato)
-    g = GraphViz::new( "G", "rankdir" => "LR", :use=>"dot" )
+    g = GraphViz::new( "G", "rankdir" => chain_params[:direction], :use => chain_params[:visualization] )
     graph_nodes=[]
     
     # если цепочка строится по септенеру, количесвто планет ограничивается семью. иначе - девять

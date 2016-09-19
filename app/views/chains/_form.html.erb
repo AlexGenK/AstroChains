@@ -31,6 +31,24 @@
 		</div>
 	</div>
 
+	<!-- опции отображения -->
+	<div class="form-group">
+		<%= f.label :visualization, 'Алгоритм:', class: "control-label col-sm-1" %>
+		<div class="col-sm-2">
+			<%= f.select :visualization,   [['dot', 'dot'],
+											['neato', 'neato'],
+											['fdp', 'fdp'],
+											['circo', 'circo']], {}, {class: "form-control"} %>
+		</div>
+		<%= f.label :direction, 'Курс:', class: "control-label col-sm-1" %>
+		<div class="col-sm-2">
+			<%= f.select :direction,   [['слева-направо', 'LR'],
+										['справа-налево', 'RL'],
+										['сверху-вниз', 'UD']], {}, {class: "form-control"} %>
+		</div>
+	</div>	
+
+
 	<div class="row">
 		<div class="col-sm-5 vcenter">
 			<!-- свойства планет в цепочке организованы в таблицу -->

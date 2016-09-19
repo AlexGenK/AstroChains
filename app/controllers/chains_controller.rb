@@ -106,7 +106,8 @@ class ChainsController < ApplicationController
                                                                               :sat_retro, :sat_weigth, :sat_center, :sat_relation,
                                                                               :ura_retro, :ura_weigth, :ura_center, :ura_relation,
                                                                               :nep_retro, :nep_weigth, :nep_center, :nep_relation,
-                                                                              :plu_retro, :plu_weigth, :plu_center, :plu_relation)
+                                                                              :plu_retro, :plu_weigth, :plu_center, :plu_relation,
+                                  :direction, :visualization)
   end
 
   # сброс хэша параметров цепочки к исходным значениям
