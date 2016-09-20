@@ -1,20 +1,6 @@
 <!-- форма со свойствами цепочки -->
 <br>
 
-<!-- обработка сообщений об ошибках -->
-<% if flash[:alert] %>
-<div class="row">
-  <div class="col-xs-12">
-    <div class="alert alert-warning fade in">
-      <a href="#" class="close" data-dismiss="alert">&times;</a>
-      <span class="glyphicon glyphicon-exclamation-sign"></span>
-      <%= flash[:alert] %>
-    </div>
-  </div> <!-- col -->
-</div> <!-- row -->
-<% flash[:alert]=nil %>
-<% end %>
-
 <%= form_for [@astro_object, @chain], html: {class: "form-horizontal"} do |f| %>
 
 	<!-- общие свойства -->
