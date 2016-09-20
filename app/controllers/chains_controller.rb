@@ -12,12 +12,13 @@ class ChainsController < ApplicationController
     @astro_object=AstroObject.find(params[:astro_object_id])
     @chain=@astro_object.chains.new(chain_params)
     @preview_name=''
+    # проверка созданной цепочки на соответствие требованиям септенера
     if (chain_params[:septener]=='1') && (!Chain.septener?(chain_params))
       flash[:alert]="Цепочка составлена не по септенеру. Перегенерируйте цепочку."
       render action: 'new'
       return
     end
-    # @chain.code=params.to_s <<<<<<<<<<<<<<<<<<<<------------------запись отладочной информации
+
     # клонируем хеш параметров, чтобы впоследствии его можно было изменить
     edited_params=chain_params.clone
     # если в форме был нажата кнопка просмотра или сброса, то цепочка создается, визуализируется с именем 'preview', 

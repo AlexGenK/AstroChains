@@ -17,11 +17,11 @@ class Chain < ActiveRecord::Base
 
   belongs_to :astro_object
 
-  # метод, визуализирующий цепочку в виде графа с помощью библиотеки GraphWiz. принмает хэш с параметрами
+  # метод, визуализирующий цепочку в виде графа с помощью библиотеки GraphWiz. принимает хэш с параметрами
   # цепочки (в соответствии с моделью) и имя файла в который будет производится визуализация
   def self.graph_create(chain_params, image_name)
 
-    # создается объект-направленный граф с шестью кластерами (dot, fdp, neato)
+    # создается объект-направленный граф
     g = GraphViz::new( "G", "rankdir" => chain_params[:direction], :use => chain_params[:visualization] )
     graph_nodes=[]
     
@@ -32,6 +32,7 @@ class Chain < ActiveRecord::Base
       end_planet=9
     end
 
+    # хэш с параметрами цепочки просматривается, и в графе создается необходимое количество кластеров
     0.upto end_planet do |i|
       pl_center=chain_params["#{PLANETS[i][:planet_prefix]}_center"]
       case pl_center

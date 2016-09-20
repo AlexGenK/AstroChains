@@ -39,11 +39,13 @@ class AstroObjectsController < ApplicationController
       redirect_to action: 'index', page: @@current_page||=1
     else
       @astro_object=AstroObject.new(astro_object_params)
+      # запись библиотек-тегов присвоенных объекту
       if params[:library] 
         @astro_object.tag_list = params[:library].join(',')
       else
         @astro_object.tag_list = ''
       end
+      # запись объекта и обработка ошибок
       if @astro_object.save
         redirect_to @astro_object
       else
@@ -72,6 +74,7 @@ class AstroObjectsController < ApplicationController
       redirect_to action: 'index', page: @@current_page||=1
     else
       @astro_object=AstroObject.find(params[:id])
+      # запись библиотек-тегов присвоенных объекту
       if params[:library] 
         @astro_object.tag_list = params[:library].join(',')
       else
