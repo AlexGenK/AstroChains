@@ -65,4 +65,5 @@ gem 'fancybox2-rails', '~> 0.2.8'
 # работа с тегами
 gem 'acts-as-taggable-on', '~> 4.0'
 
+# обфускация email
 gem 'actionview-encoded_mail_to'
