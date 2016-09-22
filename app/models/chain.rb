@@ -19,14 +19,14 @@ class Chain < ActiveRecord::Base
 
   # метод, визуализирующий цепочку в виде графа с помощью библиотеки GraphWiz. принимает хэш с параметрами
   # цепочки (в соответствии с моделью) и имя файла в который будет производится визуализация
-  def self.graph_create(chain_params, image_name)
+  def graph_create(image_name)
 
     # создается объект-направленный граф
-    g = GraphViz::new( "G", "rankdir" => chain_params[:direction], :use => chain_params[:visualization] )
+    g = GraphViz::new( "G", "rankdir" => direction, :use => visualization )
     graph_nodes=[]
     
     # если цепочка строится по септенеру, количесвто планет ограничивается семью. иначе - девять
-    if chain_params[:septener]=='1'
+    if septener
       end_planet=6
     else
       end_planet=9
@@ -34,24 +34,24 @@ class Chain < ActiveRecord::Base
 
     # хэш с параметрами цепочки просматривается, и в графе создается необходимое количество кластеров
     0.upto end_planet do |i|
-      pl_center=chain_params["#{PLANETS[i][:planet_prefix]}_center"]
+      pl_center=eval("#{PLANETS[i][:planet_prefix]}_center")
       case pl_center
-      when '1'
+      when 1
         @c1=g.add_graph("cluster1")
         @c1["color"]="red"
-      when '2'
+      when 2
         @c2=g.add_graph("cluster2")
         @c2["color"]="red"
-      when '3'
+      when 3
         @c3=g.add_graph("cluster3")
         @c3["color"]="red"
-      when '4'
+      when 4
         @c4=g.add_graph("cluster4")
         @c4["color"]="red"
-      when '5'
+      when 5
         @c5=g.add_graph("cluster5")
         @c5["color"]="red"
-      when '6'
+      when 6
         @c6=g.add_graph("cluster6")
         @c6["color"]="red"
       end
@@ -62,39 +62,39 @@ class Chain < ActiveRecord::Base
       # для планеты вытаскиваем префикс, символ в шрифте, вес в графе и признак ретроградности
       pl_prefix=PLANETS[i][:planet_prefix]
       pl_symbol=PLANETS[i][:planet_symbol]
-      pl_weigth=chain_params["#{pl_prefix}_weigth"].to_i
-      pl_retro=chain_params["#{pl_prefix}_retro"].to_i
+      pl_weigth=eval("#{pl_prefix}_weigth")
+      pl_retro=eval("#{pl_prefix}_retro")
 
       # формируем строку, которая в описании узла-планеты в графе отвечает за вес
-      if pl_weigth==0
+      if pl_weigth.to_i==0
         pl_weigth_string=''
       else
         pl_weigth_string="<font color='forestgreen' point-size='20'>#{pl_weigth}</font>"
       end
 
       # формируем строку, которая в описании узла-планеты в графе отвечает за ретроградность
-      if pl_retro==0
-        pl_retro_string=''
-      else
+      if pl_retro
         pl_retro_string="<font color='black' point-size='20'>N</font>"
+      else
+        pl_retro_string=''
       end
 
       # узнаем, принадлежит ли планета к какому-либо кластеру и добавляем узел-планету к соответствующему кластеру
-      pl_center=chain_params["#{pl_prefix}_center"]
+      pl_center=eval("#{pl_prefix}_center")
       case pl_center
-      when '0'
+      when 0
         graph_nodes[i]=g.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
-      when '1'
+      when 1
         graph_nodes[i]=@c1.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
-      when '2'
+      when 2
         graph_nodes[i]=@c2.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
-      when '3'
+      when 3
         graph_nodes[i]=@c3.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
-      when '4'
+      when 4
         graph_nodes[i]=@c4.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
-      when '5'
+      when 5
         graph_nodes[i]=@c5.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")   
-      else
+      when 6
         graph_nodes[i]=@c6.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       end
     end
@@ -102,7 +102,7 @@ class Chain < ActiveRecord::Base
     # снова проходим по всем планетам для создания связей между узлами графа
     0.upto end_planet do |i|
       # определяем с какой планетой связана планета
-      pl_relation=chain_params["#{PLANETS[i][:planet_prefix]}_relation"].to_i
+      pl_relation=eval("#{PLANETS[i][:planet_prefix]}_relation")
       # если связь есть, то создаем
       g.add_edges(graph_nodes[i], graph_nodes[pl_relation]) if pl_relation<100
     end

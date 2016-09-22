@@ -33,12 +33,12 @@ class ChainsController < ApplicationController
       end
       # меняем атрибуты цепочки без ее записи и визуализируем ее
       @chain.assign_attributes(edited_params)
-      Chain.graph_create(edited_params, @preview_name)
+      @chain.graph_create(@preview_name)
       render action: 'new'
     else
       @chain.save
       @preview_name=@chain.id.to_s
-      Chain.graph_create(chain_params, @preview_name)
+      @chain.graph_create(@preview_name)
       redirect_to @astro_object
     end
   end
@@ -70,7 +70,7 @@ class ChainsController < ApplicationController
       render action: 'edit'
       return
     end
-    Chain.graph_create(chain_params, @preview_name)
+    @chain.graph_create(@preview_name)
     # если в форме был нажата кнопка просмотра или сброса, то цепочка меняется, визуализируется с именем-id цепочки, 
     # но не записывается и снова вводится форма редактирования цепочки.
     # в обратном случае происходит то же самое, но цепочка сохраняется и выводится форма просмотра объекта 
@@ -79,7 +79,8 @@ class ChainsController < ApplicationController
       # если была нажата кнопка Сбросить, то сбрасываем хэш параметров к исходным значениям
       if params[:commit]=='Сбросить'
         reset_params! edited_params
-        Chain.graph_create(edited_params, @preview_name)
+        @chain.assign_attributes(edited_params)
+        @chain.graph_create(@preview_name)
       end
       # меняем атрибуты цепочки без ее записи
       @chain.assign_attributes(edited_params)
@@ -87,7 +88,7 @@ class ChainsController < ApplicationController
     else
       if @chain.update(chain_params)
         @preview_name=@chain.id.to_s
-        Chain.graph_create(chain_params, @preview_name)
+        @chain.graph_create(@preview_name)
         redirect_to @astro_object
       else
         render action: 'edit'
