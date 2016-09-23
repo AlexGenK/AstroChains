@@ -65,7 +65,7 @@ class Chain < ActiveRecord::Base
       pl_retro=eval("#{pl_prefix}_retro")
 
       # формируем строку, которая в описании узла-планеты в графе отвечает за вес
-      if pl_weigth.to_i==0
+      if pl_weigth==nil
         pl_weigth_string=''
       else
         pl_weigth_string="<font color='forestgreen' point-size='20'>#{pl_weigth}</font>"
