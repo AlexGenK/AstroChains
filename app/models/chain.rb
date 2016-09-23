@@ -31,28 +31,38 @@ class Chain < ActiveRecord::Base
       end_planet=9
     end
 
+    # в зависимости от выбранного стиля визуализации центров, определяется цвет рамки, выделяющей центры,
+    # и цвет элементов находящихся в центрах
+    if center_style=="frame"
+      frame_color="red"
+      element_color="black"
+    else
+      frame_color="white"
+      element_color="red"
+    end
+
     # параметры цепочки просматриваеюся, и в графе создается необходимое количество кластеров
     0.upto end_planet do |i|
       pl_center=eval("#{PLANETS[i][:planet_prefix]}_center")
       case pl_center
       when 1
         @c1=g.add_graph("cluster1")
-        @c1["color"]="red"
+        @c1["color"]=frame_color
       when 2
         @c2=g.add_graph("cluster2")
-        @c2["color"]="red"
+        @c2["color"]=frame_color
       when 3
         @c3=g.add_graph("cluster3")
-        @c3["color"]="red"
+        @c3["color"]=frame_color
       when 4
         @c4=g.add_graph("cluster4")
-        @c4["color"]="red"
+        @c4["color"]=frame_color
       when 5
         @c5=g.add_graph("cluster5")
-        @c5["color"]="red"
+        @c5["color"]=frame_color
       when 6
         @c6=g.add_graph("cluster6")
-        @c6["color"]="red"
+        @c6["color"]=frame_color
       end
     end
 
@@ -84,17 +94,17 @@ class Chain < ActiveRecord::Base
       when 0
         graph_nodes[i]=g.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
       when 1
-        graph_nodes[i]=@c1.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+        graph_nodes[i]=@c1.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
       when 2
-        graph_nodes[i]=@c2.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+        graph_nodes[i]=@c2.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
       when 3
-        graph_nodes[i]=@c3.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+        graph_nodes[i]=@c3.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
       when 4
-        graph_nodes[i]=@c4.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+        graph_nodes[i]=@c4.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
       when 5
-        graph_nodes[i]=@c5.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")   
+        graph_nodes[i]=@c5.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)   
       when 6
-        graph_nodes[i]=@c6.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+        graph_nodes[i]=@c6.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
       end
     end
 
@@ -103,7 +113,12 @@ class Chain < ActiveRecord::Base
       # определяем с какой планетой связана планета
       pl_relation=eval("#{PLANETS[i][:planet_prefix]}_relation")
       # если связь есть, то создаем
-      g.add_edges(graph_nodes[i], graph_nodes[pl_relation]) if pl_relation<100
+      if eval("#{PLANETS[i][:planet_prefix]}_center")>0
+        edge_color=element_color
+      else
+        edge_color="black"
+      end
+      g.add_edges(graph_nodes[i], graph_nodes[pl_relation], :color=>edge_color) if pl_relation<100
     end
     
     # собственно визуализация графа в файл

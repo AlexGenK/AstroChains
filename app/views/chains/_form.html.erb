@@ -33,6 +33,11 @@
 										['справа-налево', 'RL'],
 										['сверху-вниз', 'UD']], {}, {class: "form-control"} %>
 		</div>
+		<%= f.label :center_style, 'Центр:', class: "control-label col-md-1" %>
+		<div class="col-md-3">
+			<%= f.select :center_style, [['выделен рамкой', 'frame'],
+										 ['выделен цветом элементов', 'elements']], {}, {class: "form-control"} %>
+		</div>
 	</div>	
 
 
