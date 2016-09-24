@@ -5,6 +5,7 @@ class ChainsController < ApplicationController
     @astro_object=AstroObject.find(params[:astro_object_id])
     # если передан параметр source, то новая цепочка создается по образцу старой (копия)
     if params[:source]
+      flash[:message]="Цепочка успешно скопирована."
       @chain=Chain.find(params[:source]).dup
       @preview_name=params[:source]
     else
