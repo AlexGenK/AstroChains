@@ -83,6 +83,7 @@
 			<br>
 		</div>
 		<%= link_to "Редактировать", edit_astro_object_chain_path(@astro_object, item), class: "btn btn-default btn-block no-overflow" %>
+		<%= link_to "Копировать", new_astro_object_chain_path(@astro_object, :source=>item.id), class: "btn btn-default btn-block no-overflow" %>
 		<%= link_to "Удалить", [@astro_object, item], method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-danger btn-block no-overflow" %>
 	</div>
 </div>

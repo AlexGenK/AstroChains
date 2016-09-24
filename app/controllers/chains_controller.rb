@@ -3,9 +3,15 @@ class ChainsController < ApplicationController
 
   def new
     @astro_object=AstroObject.find(params[:astro_object_id])
-    # создается пустой объект-цепочка, прчием имя графического файла с его отображением - пустое
-    @chain=@astro_object.chains.build
-    @preview_name=''
+    # если передан параметр source, то новая цепочка создается по образцу старой (копия)
+    if params[:source]
+      @chain=Chain.find(params[:source]).dup
+      @preview_name=params[:source]
+    else
+      #иначе создается пустой объект-цепочка, прчием имя графического файла с его отображением - пустое
+      @chain=@astro_object.chains.build
+      @preview_name=''
+    end
   end
 
   def create
