@@ -118,7 +118,7 @@ class Chain < ActiveRecord::Base
       else
         edge_color="black"
       end
-      g.add_edges(graph_nodes[i], graph_nodes[pl_relation], :color=>edge_color) if pl_relation<100
+      g.add_edges(graph_nodes[i], graph_nodes[pl_relation], :color=>edge_color, :len=>"1.2") if pl_relation<100
     end
     
     # собственно визуализация графа в файл
