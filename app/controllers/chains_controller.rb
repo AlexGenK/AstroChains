@@ -103,6 +103,12 @@ class ChainsController < ApplicationController
     end
   end
 
+  def show
+    @astro_object=AstroObject.find(params[:astro_object_id])
+    @chain=Chain.find(params[:id])
+    redirect_to edit_astro_object_chain_path(@astro_object, @chain)
+  end
+
   private
 
   # разрешение передачи параметров
