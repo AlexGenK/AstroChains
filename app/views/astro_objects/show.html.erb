@@ -23,7 +23,7 @@
 				Комментарий:
 			</div>
 			<div class='col-sm-12 col-md-10'>
-				<%= @astro_object.comment %>
+				<%= simple_format(@astro_object.comment) %>
 			</div>
 		</div>
 		<div class='row'>
@@ -74,7 +74,7 @@
 				Комментарий:
 			</div>
 			<div class='col-sm-10'>
-				<%= item.comment %>
+				<%= simple_format(item.comment) %>
 			</div>
 		</div>
 	<!-- это, блин, магия! если не слить в одной строке конец и начало div, ячейка не отцентрируется! -->

@@ -103,6 +103,7 @@ class ChainsController < ApplicationController
     end
   end
 
+  # экшен-заглушка, перенаправляющий на экшен edit
   def show
     @astro_object=AstroObject.find(params[:astro_object_id])
     @chain=Chain.find(params[:id])
