@@ -103,7 +103,7 @@ class AstroObjectsController < ApplicationController
 
   # разрешение передачи параметров
   def astro_object_params
-    params.require(:astro_object).permit(:name, :date, :time, :comment, :tag_list)
+    params.require(:astro_object).permit(:name, :date, :time, :comment, :tag_list, :birthplace)
   end
 
 end
