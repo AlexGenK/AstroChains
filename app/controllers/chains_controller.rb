@@ -53,7 +53,7 @@ class ChainsController < ApplicationController
   def destroy
     Chain.find(params[:id]).destroy
     # после удаления цепочки удаляется и файл с ее визуализацией, если он существует
-    File.delete("/public/images/chaingraphs/#{params[:id]}.png") if File.exist?("/public/images/chaingraphs/#{params[:id]}.png")
+    File.delete("./public/images/chaingraphs/#{params[:id]}.png") if File.exist?("./public/images/chaingraphs/#{params[:id]}.png")
     redirect_to AstroObject.find(params[:astro_object_id])
   end
 
