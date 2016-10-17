@@ -82,7 +82,11 @@
 																						  ['W', 6],
 																						  ['X', 7],
 																						  ['Y', 8],
-																						  ['Z', 9]], 
+																						  ['Z', 9],
+																						  ['<', 101],
+																						  ['>', 102],
+																						  ['d', 103],
+																						  ['e', 104]], 
 								{}, {class: "astrofont form-control"} %>	
 							</td>			
 						</tr>
@@ -95,6 +99,45 @@
 						    });	
 						</script>
 					<% end %>
+				</tbody>
+			</table>
+			<!-- отдельная однострочная табличка для ввода свойств специфической завершающей планеты -->
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>R</th>
+						<th>Вес</th>
+						<th>Центр</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Конечная планета</td>
+						<td><%= f.check_box :end_retro, class: "checkbox" %></td>
+						<td><%= f.text_field :end_weigth, class: "form-control", style: "width: 50px;" %></td>
+						<td><%= f.select :end_center, [['нет', 0],
+													   ['1', 1],
+													   ['2', 2],
+													   ['3', 3],
+													   ['4', 4],
+													   ['5', 5],
+													   ['6', 6]], {}, {class: "form-control"} %> </td>
+						<td><%= f.select :end_planet, [[' ', 100],
+													   ['<', 101],
+													   ['>', 102],
+													   ['d', 103],
+													   ['e', 104]], 
+								{}, {class: "astrofont form-control"} %> </td>
+					</tr>
+					<script type="text/javascript">
+							$("input[name='chain[end_weigth]']").TouchSpin({
+						      verticalbuttons: true,
+						      min: 0,
+						      max: 6
+						    });	
+					</script>
 				</tbody>
 			</table>
 			<hr>
