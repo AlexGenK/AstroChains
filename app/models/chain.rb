@@ -26,9 +26,9 @@ class Chain < ActiveRecord::Base
     
     # если цепочка строится по септенеру, количестdо планет ограничивается семью. иначе - девять
     if septener
-      end_planet=6
+      nodes_count=6
     else
-      end_planet=9
+      nodes_count=9
     end
 
     # в зависимости от выбранного стиля визуализации центров, определяется цвет рамки, выделяющей центры,
@@ -42,7 +42,7 @@ class Chain < ActiveRecord::Base
     end
 
     # параметры цепочки просматриваеюся, и в графе создается необходимое количество кластеров
-    0.upto end_planet do |i|
+    0.upto nodes_count do |i|
       pl_center=eval("#{PLANETS[i][:planet_prefix]}_center")
       case pl_center
       when 1
@@ -67,7 +67,7 @@ class Chain < ActiveRecord::Base
     end
 
     # проходим цикл по всем планетам для формирования узлов графа
-    0.upto end_planet do |i|
+    0.upto nodes_count do |i|
       # для планеты вытаскиваем префикс, символ в шрифте, вес в графе и признак ретроградности
       pl_prefix=PLANETS[i][:planet_prefix]
       pl_symbol=PLANETS[i][:planet_symbol]
@@ -109,7 +109,7 @@ class Chain < ActiveRecord::Base
     end
 
     # снова проходим по всем планетам для создания связей между узлами графа
-    0.upto end_planet do |i|
+    0.upto nodes_count do |i|
       # определяем с какой планетой связана планета
       pl_relation=eval("#{PLANETS[i][:planet_prefix]}_relation")
       # если связь есть, то создаем
