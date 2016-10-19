@@ -93,18 +93,8 @@ class Chain < ActiveRecord::Base
       case pl_center
       when 0
         graph_nodes[i]=g.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
-      when 1
-        graph_nodes[i]=@c1.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
-      when 2
-        graph_nodes[i]=@c2.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
-      when 3
-        graph_nodes[i]=@c3.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
-      when 4
-        graph_nodes[i]=@c4.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
-      when 5
-        graph_nodes[i]=@c5.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)   
-      when 6
-        graph_nodes[i]=@c6.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
+      when 1..6
+        graph_nodes[i]=eval("@c#{pl_center}").add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
       end
     end
 
