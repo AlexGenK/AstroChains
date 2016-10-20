@@ -24,7 +24,7 @@ class Chain < ActiveRecord::Base
     g = GraphViz::new( "G", "rankdir" => direction, :use => visualization )
     graph_nodes=[]
     
-    # если цепочка строится по септенеру, количестdо планет ограничивается семью. иначе - девять
+    # если цепочка строится по септенеру, количество планет ограничивается семью. иначе - девять
     if septener
       nodes_count=6
     else
@@ -44,26 +44,10 @@ class Chain < ActiveRecord::Base
     # параметры цепочки просматриваеюся, и в графе создается необходимое количество кластеров
     0.upto nodes_count do |i|
       pl_center=eval("#{PLANETS[i][:planet_prefix]}_center")
-      case pl_center
-      when 1
-        @c1=g.add_graph("cluster1")
-        @c1["color"]=frame_color
-      when 2
-        @c2=g.add_graph("cluster2")
-        @c2["color"]=frame_color
-      when 3
-        @c3=g.add_graph("cluster3")
-        @c3["color"]=frame_color
-      when 4
-        @c4=g.add_graph("cluster4")
-        @c4["color"]=frame_color
-      when 5
-        @c5=g.add_graph("cluster5")
-        @c5["color"]=frame_color
-      when 6
-        @c6=g.add_graph("cluster6")
-        @c6["color"]=frame_color
-      end
+      if pl_center>0 
+        instance_variable_set("@c#{pl_center}", g.add_graph("cluster#{pl_center}"))
+        eval("@c#{pl_center}")["color"]=frame_color
+      end 
     end
 
     # проходим цикл по всем планетам для формирования узлов графа
