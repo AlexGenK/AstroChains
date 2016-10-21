@@ -124,6 +124,7 @@ class ChainsController < ApplicationController
                                                                               :ura_retro, :ura_weigth, :ura_center, :ura_relation,
                                                                               :nep_retro, :nep_weigth, :nep_center, :nep_relation,
                                                                               :plu_retro, :plu_weigth, :plu_center, :plu_relation,
+                                                                              :end_retro, :end_weigth, :end_center, :end_planet,
                                   :direction, :visualization, :center_style)
   end
 

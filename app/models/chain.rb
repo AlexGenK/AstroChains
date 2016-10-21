@@ -15,6 +15,9 @@ class Chain < ActiveRecord::Base
             {:planet_name=>'Плутон', :planet_prefix=>'plu', :planet_symbol=>'Z'}
             ].freeze
 
+  # константа с символами оконечных планет
+  ENDERS=['&lt;','&gt;','d','e'].freeze
+
   belongs_to :astro_object
 
   # метод, визуализирующий цепочку в виде графа с помощью библиотеки GraphWiz. принимает имя файла в который будет производится визуализация
@@ -80,6 +83,11 @@ class Chain < ActiveRecord::Base
       when 1..6
         graph_nodes[i]=eval("@c#{pl_center}").add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
       end
+    end
+
+    # добавляем конечную планету
+    if end_planet>100
+      graph_nodes[nodes_count+1]=g.add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}</font>>")
     end
 
     # снова проходим по всем планетам для создания связей между узлами графа
