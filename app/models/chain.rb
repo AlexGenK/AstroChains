@@ -100,7 +100,10 @@ class Chain < ActiveRecord::Base
       else
         edge_color="black"
       end
+      # создание связи к обычной планете
       g.add_edges(graph_nodes[i], graph_nodes[pl_relation], :color=>edge_color, :len=>"1.2") if pl_relation<100
+      # создание свзяи к конеченой планете
+      g.add_edges(graph_nodes[i], graph_nodes[nodes_count+1], :color=>edge_color, :len=>"1.2") if pl_relation>100
     end
     
     # собственно визуализация графа в файл
