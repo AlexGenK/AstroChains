@@ -91,11 +91,24 @@ class Chain < ActiveRecord::Base
 
     # добавляем конечную планету
     if end_planet>100
+      
+      if end_weigth
+        end_weigth_string="<font color='forestgreen' point-size='20'>#{end_weigth}</font>"
+      else
+        end_weigth_string=''
+      end
+
+      if end_retro
+        end_retro_string="<font color='black' point-size='20'>N</font>"
+      else
+        end_retro_string=''
+      end
+
       case end_center
       when 0
-        graph_nodes[nodes_count+1]=g.add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}</font>>")
+        graph_nodes[nodes_count+1]=g.add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}#{end_weigth_string}#{end_retro_string}</font>>")
       when 1..6
-        graph_nodes[nodes_count+1]=eval("@c#{end_center}").add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}</font>>", :color=>element_color)
+        graph_nodes[nodes_count+1]=eval("@c#{end_center}").add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}#{end_weigth_string}#{end_retro_string}</font>>", :color=>element_color)
       end
     end
 
