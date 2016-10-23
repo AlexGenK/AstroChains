@@ -52,6 +52,10 @@ class Chain < ActiveRecord::Base
         eval("@c#{pl_center}")["color"]=frame_color
       end 
     end
+    if end_center>0
+      instance_variable_set("@c#{end_center}", g.add_graph("cluster#{end_center}"))
+      eval("@c#{end_center}")["color"]=frame_color
+    end
 
     # проходим цикл по всем планетам для формирования узлов графа
     0.upto nodes_count do |i|
@@ -87,7 +91,12 @@ class Chain < ActiveRecord::Base
 
     # добавляем конечную планету
     if end_planet>100
-      graph_nodes[nodes_count+1]=g.add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}</font>>")
+      case end_center
+      when 0
+        graph_nodes[nodes_count+1]=g.add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}</font>>")
+      when 1..6
+        graph_nodes[nodes_count+1]=eval("@c#{end_center}").add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}</font>>", :color=>element_color)
+      end
     end
 
     # снова проходим по всем планетам для создания связей между узлами графа
@@ -102,7 +111,7 @@ class Chain < ActiveRecord::Base
       end
       # создание связи к обычной планете
       g.add_edges(graph_nodes[i], graph_nodes[pl_relation], :color=>edge_color, :len=>"1.2") if pl_relation<100
-      # создание свзяи к конеченой планете
+      # создание свзяи к конечной планете
       g.add_edges(graph_nodes[i], graph_nodes[nodes_count+1], :color=>edge_color, :len=>"1.2") if pl_relation>100
     end
     
