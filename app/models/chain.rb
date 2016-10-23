@@ -28,12 +28,8 @@ class Chain < ActiveRecord::Base
     graph_nodes=[]
     
     # если цепочка строится по септенеру, количество планет ограничивается семью. иначе - девять
-    if septener
-      nodes_count=6
-    else
-      nodes_count=9
-    end
-
+    nodes_count = septener ? 6 : 9
+    
     # в зависимости от выбранного стиля визуализации центров, определяется цвет рамки, выделяющей центры,
     # и цвет элементов находящихся в центрах
     if center_style=="frame"
@@ -66,18 +62,10 @@ class Chain < ActiveRecord::Base
       pl_retro=eval("#{pl_prefix}_retro")
 
       # формируем строку, которая в описании узла-планеты в графе отвечает за вес
-      if pl_weigth==nil
-        pl_weigth_string=''
-      else
-        pl_weigth_string="<font color='forestgreen' point-size='20'>#{pl_weigth}</font>"
-      end
+      pl_weigth_string = pl_weigth ? "<font color='forestgreen' point-size='20'>#{pl_weigth}</font>" : ''
 
       # формируем строку, которая в описании узла-планеты в графе отвечает за ретроградность
-      if pl_retro
-        pl_retro_string="<font color='black' point-size='20'>N</font>"
-      else
-        pl_retro_string=''
-      end
+      pl_retro_string = pl_retro ? "<font color='black' point-size='20'>N</font>" : ''
 
       # узнаем, принадлежит ли планета к какому-либо кластеру и добавляем узел-планету к соответствующему кластеру
       pl_center=eval("#{pl_prefix}_center")
@@ -92,17 +80,8 @@ class Chain < ActiveRecord::Base
     # добавляем конечную планету
     if end_planet>100
       
-      if end_weigth
-        end_weigth_string="<font color='forestgreen' point-size='20'>#{end_weigth}</font>"
-      else
-        end_weigth_string=''
-      end
-
-      if end_retro
-        end_retro_string="<font color='black' point-size='20'>N</font>"
-      else
-        end_retro_string=''
-      end
+      end_weigth_string = end_weigth ? "<font color='forestgreen' point-size='20'>#{end_weigth}</font>" : ''
+      end_retro_string = end_retro ? "<font color='black' point-size='20'>N</font>" : ''
 
       case end_center
       when 0
