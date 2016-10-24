@@ -99,22 +99,8 @@
 						    });	
 						</script>
 					<% end %>
-				</tbody>
-			</table>
-			<!-- отдельная однострочная табличка для ввода свойств специфической завершающей планеты -->
-			<table class="table table-striped">
-				<thead>
 					<tr>
-						<th></th>
-						<th>R</th>
-						<th>Вес</th>
-						<th>Центр</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Конечная планета</td>
+						<td colspan="2">Конечная планета</td>
 						<td><%= f.check_box :end_retro, class: "checkbox" %></td>
 						<td><%= f.text_field :end_weigth, class: "form-control", style: "width: 50px;" %></td>
 						<td><%= f.select :end_center, [['нет', 0],
@@ -124,6 +110,7 @@
 													   ['4', 4],
 													   ['5', 5],
 													   ['6', 6]], {}, {class: "form-control"} %> </td>
+						<td></td>
 						<td><%= f.select :end_planet, [[' ', 100],
 													   ['<', 101],
 													   ['>', 102],
@@ -131,16 +118,15 @@
 													   ['e', 104]], 
 								{}, {class: "astrofont form-control"} %> </td>
 					</tr>
-					<script type="text/javascript">
-							$("input[name='chain[end_weigth]']").TouchSpin({
-						      verticalbuttons: true,
-						      min: 0,
-						      max: 6
-						    });	
-					</script>
 				</tbody>
 			</table>
-			<hr>
+			<script type="text/javascript">
+				$("input[name='chain[end_weigth]']").TouchSpin({
+				    verticalbuttons: true,
+				    min: 0,
+			      	max: 6
+				});	
+			</script>
 			<%= f.submit 'Просмотреть', class: "btn btn-default" %>
 			<%= f.submit 'Сбросить', class: "btn btn-default" %>
 			<hr>
