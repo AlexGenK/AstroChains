@@ -136,6 +136,10 @@ class ChainsController < ApplicationController
       params["#{item[:planet_prefix]}_center"]="0"
       params["#{item[:planet_prefix]}_relation"]="100"
     end
+    params["end_retro"]="0"
+    params["end_weigth"]=nil
+    params["end_center"]="0"
+    params["end_planet"]="100"
   end
 
 end
