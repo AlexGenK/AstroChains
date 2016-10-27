@@ -71,9 +71,9 @@ class Chain < ActiveRecord::Base
       pl_center=eval("#{pl_prefix}_center")
       case pl_center
       when 0
-        graph_nodes[i]=g.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>")
+        graph_nodes[i]=g.add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_retro_string}#{pl_weigth_string}</font>>")
       when 1..6
-        graph_nodes[i]=eval("@c#{pl_center}").add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_weigth_string}#{pl_retro_string}</font>>", :color=>element_color)
+        graph_nodes[i]=eval("@c#{pl_center}").add_nodes(pl_prefix, :label=>"<<font face='astro-semibold' point-size='25'>#{pl_symbol}#{pl_retro_string}#{pl_weigth_string}</font>>", :color=>element_color)
       end
     end
 
@@ -85,9 +85,9 @@ class Chain < ActiveRecord::Base
 
       case end_center
       when 0
-        graph_nodes[nodes_count+1]=g.add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}#{end_weigth_string}#{end_retro_string}</font>>")
+        graph_nodes[nodes_count+1]=g.add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}#{end_retro_string}#{end_weigth_string}</font>>")
       when 1..6
-        graph_nodes[nodes_count+1]=eval("@c#{end_center}").add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}#{end_weigth_string}#{end_retro_string}</font>>", :color=>element_color)
+        graph_nodes[nodes_count+1]=eval("@c#{end_center}").add_nodes('ender', :label=>"<<font face='astro-semibold' point-size='25'>#{ENDERS[end_planet-101]}#{end_retro_string}#{end_weigth_string}</font>>", :color=>element_color)
       end
     end
 
