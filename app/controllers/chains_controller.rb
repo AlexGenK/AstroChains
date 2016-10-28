@@ -130,12 +130,14 @@ class ChainsController < ApplicationController
 
   # сброс хэша параметров цепочки к исходным значениям
   def reset_params! params
+    # сброс основных планет
     Chain::PLANETS.each do |item|
       params["#{item[:planet_prefix]}_retro"]="0"
       params["#{item[:planet_prefix]}_weigth"]=nil
       params["#{item[:planet_prefix]}_center"]="0"
       params["#{item[:planet_prefix]}_relation"]="100"
     end
+    # сброс дополнительного центра
     params["end_retro"]="0"
     params["end_weigth"]=nil
     params["end_center"]="0"
