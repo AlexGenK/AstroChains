@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017191211) do
+ActiveRecord::Schema.define(version: 20161101204844) do
 
   create_table "astro_objects", force: :cascade do |t|
     t.text     "name"
@@ -74,10 +74,26 @@ ActiveRecord::Schema.define(version: 20161017191211) do
     t.text     "direction"
     t.text     "visualization"
     t.text     "center_style",    default: "elements"
-    t.integer  "end_planet"
-    t.boolean  "end_retro"
-    t.integer  "end_weigth"
-    t.integer  "end_center"
+    t.boolean  "smn_retro"
+    t.integer  "smn_weigth"
+    t.integer  "smn_center"
+    t.integer  "smn_relation"
+    t.boolean  "smn_exist"
+    t.boolean  "nmn_retro"
+    t.integer  "nmn_weigth"
+    t.integer  "nmn_center"
+    t.integer  "nmn_relation"
+    t.boolean  "nmn_exist"
+    t.boolean  "chi_retro"
+    t.integer  "chi_weigth"
+    t.integer  "chi_center"
+    t.integer  "chi_relation"
+    t.boolean  "chi_exist"
+    t.boolean  "pro_retro"
+    t.integer  "pro_weigth"
+    t.integer  "pro_center"
+    t.integer  "pro_relation"
+    t.boolean  "pro_exist"
   end
 
   add_index "chains", ["astro_object_id"], name: "index_chains_on_astro_object_id"
