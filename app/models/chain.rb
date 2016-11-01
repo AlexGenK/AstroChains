@@ -12,11 +12,12 @@ class Chain < ActiveRecord::Base
             {:planet_name=>'Сатурн', :planet_prefix=>'sat', :planet_symbol=>'W'},
             {:planet_name=>'Уран', :planet_prefix=>'ura', :planet_symbol=>'X'},
             {:planet_name=>'Нептун', :planet_prefix=>'nep', :planet_symbol=>'Y'},
-            {:planet_name=>'Плутон', :planet_prefix=>'plu', :planet_symbol=>'Z'}
+            {:planet_name=>'Плутон', :planet_prefix=>'plu', :planet_symbol=>'Z'},
+            {:planet_name=>'Юж. центр', :planet_prefix=>'smn', :planet_symbol=>'&lt;'},
+            {:planet_name=>'Сев. центр', :planet_prefix=>'nmn', :planet_symbol=>'&gt;'},
+            {:planet_name=>'Хирон', :planet_prefix=>'chi', :planet_symbol=>'e'},
+            {:planet_name=>'Прозерпина', :planet_prefix=>'pro', :planet_symbol=>'d'},
             ].freeze
-
-  # константа с символами оконечных планет
-  ENDERS=['&lt;','&gt;','d','e'].freeze
 
   belongs_to :astro_object
 
