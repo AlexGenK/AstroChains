@@ -124,7 +124,10 @@ class ChainsController < ApplicationController
                                                                               :ura_retro, :ura_weigth, :ura_center, :ura_relation,
                                                                               :nep_retro, :nep_weigth, :nep_center, :nep_relation,
                                                                               :plu_retro, :plu_weigth, :plu_center, :plu_relation,
-                                                                              :end_retro, :end_weigth, :end_center, :end_planet,
+                                                                              :smn_retro, :smn_weigth, :smn_center, :smn_relation, :smn_exist,
+                                                                              :nmn_retro, :nmn_weigth, :nmn_center, :nmn_relation, :nmn_exist,
+                                                                              :chi_retro, :chi_weigth, :chi_center, :chi_relation, :chi_exist,
+                                                                              :pro_retro, :pro_weigth, :pro_center, :pro_relation, :pro_exist,
                                   :direction, :visualization, :center_style)
   end
 
