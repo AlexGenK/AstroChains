@@ -53,11 +53,11 @@
 						<th>Вес</th>
 						<th>Центр</th>
 						<th></th>
-						<th></th>
+						<th>Связь</th>
 					</tr>
 				</thead>
 				<tbody>
-					<% Chain::PLANETS.each do |planet|%>
+					<% Chain::PLANETS.each_with_index do |planet, index|%>
 						<tr>
 							<td><%= planet[:planet_name]%></td>
 							<td><span class='astrofont'><%= planet[:planet_symbol]%></span></td>
@@ -71,8 +71,10 @@
 																						['5', 5],
 																						['6', 6]], {}, {class: "form-control"} %>
 							</td>
-							<td><span class="glyphicon glyphicon-arrow-right"></span></td>
-							<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [[' ', 100],
+							<!-- параметры для основных планет -->
+							<% if index<=9 %>
+								<td><span class="glyphicon glyphicon-arrow-right"></span></td>
+								<td><%= f.select "#{planet[:planet_prefix]}_relation".to_sym, [[' ', 100],
 																						  ['Q', 0],
 																						  ['R', 1],
 																						  ['S', 2],
@@ -83,11 +85,17 @@
 																						  ['X', 7],
 																						  ['Y', 8],
 																						  ['Z', 9],
-																						  ['<', 101],
-																						  ['>', 102],
-																						  ['d', 103],
-																						  ['e', 104]], 
-								{}, {class: "astrofont form-control"} %>	
+																						  ['m', 10],
+																						  ['M', 11],
+																						  ['e', 12],
+																						  ['d', 13]], 
+								{}, {class: "astrofont form-control"} %>
+							<!-- параметры для дополнительных центров -->
+							<% else %>
+								<td></td>
+								<td align="center"><%= f.check_box "#{planet[:planet_prefix]}_exist".to_sym, class: "checkbox" %></td></td>
+							<% end %>
+								
 							</td>			
 						</tr>
 						<!-- пикер для ввода цифр -->
@@ -98,27 +106,18 @@
 						      max: 6
 						    });	
 						</script>
+						<% if index==9 %>
+							<tr>
+							<th></th>
+							<th></th>
+							<th>R</th>
+							<th>Вес</th>
+							<th>Центр</th>
+							<th></th>
+							<th>Наличие</th>
+							</tr>
+						<% end %>
 					<% end %>
-					<!-- строка планеты - дополнительного центра -->
-					<tr>
-						<td colspan="2">Дополн. центр</td>
-						<td><%= f.check_box :end_retro, class: "checkbox" %></td>
-						<td><%= f.text_field :end_weigth, class: "form-control", style: "width: 50px;" %></td>
-						<td><%= f.select :end_center, [['нет', 0],
-													   ['1', 1],
-													   ['2', 2],
-													   ['3', 3],
-													   ['4', 4],
-													   ['5', 5],
-													   ['6', 6]], {}, {class: "form-control"} %> </td>
-						<td></td>
-						<td><%= f.select :end_planet, [[' ', 100],
-													   ['<', 101],
-													   ['>', 102],
-													   ['d', 103],
-													   ['e', 104]], 
-								{}, {class: "astrofont form-control"} %> </td>
-					</tr>
 				</tbody>
 			</table>
 			<script type="text/javascript">
