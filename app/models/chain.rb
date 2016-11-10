@@ -95,11 +95,14 @@ class Chain < ActiveRecord::Base
     g.output(:png => "public/images/chaingraphs/#{image_name}.png")
   end
 
-  # метод, принмает хэш с параметрами цепочки и определяет соответсвует ли он параметрам по септенеру
+  # метод, принмает хэш с параметрами цепочки и определяет соответствует ли он правилам построения цепочек
   def self.is_incorrect?(chain_params)
-      0.upto 6 do |i|
+      nodes_count= chain_params["septener"]=="1" ? 6 : 9
+      0.upto nodes_count do |i|
         planet_relation_number=chain_params["#{PLANETS[i][:planet_prefix]}_relation"].to_i
+        planet_relation_exist= ((planet_relation_number > 9) && (planet_relation_number < 100))  ? chain_params["#{PLANETS[planet_relation_number][:planet_prefix]}_exist"] : "1"
         return "Цепочка построенна не по септенеру. Перегенерируйте цепочку." if (planet_relation_number > 6) && (planet_relation_number < 100) && (chain_params["septener"]=="1")
+        return "В цепочке используются несуществующие дополнительные центры. Перегенерируйте цепочку." if planet_relation_exist!="1"
       end
       return false
   end
