@@ -20,8 +20,9 @@ class ChainsController < ApplicationController
     @chain=@astro_object.chains.new(chain_params)
     @preview_name=''
     # проверка созданной цепочки на соответствие требованиям септенера
-    if (chain_params[:septener]=='1') && (!Chain.septener?(chain_params))
-      flash[:alert]="Цепочка составлена не по септенеру. Перегенерируйте цепочку."
+    chain_error=Chain.is_incorrect?(chain_params)
+    if chain_error
+      flash[:alert]=chain_error
       render action: 'new'
       return
     end

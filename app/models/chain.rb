@@ -96,12 +96,12 @@ class Chain < ActiveRecord::Base
   end
 
   # метод, принмает хэш с параметрами цепочки и определяет соответсвует ли он параметрам по септенеру
-  def self.septener?(chain_params)
+  def self.is_incorrect?(chain_params)
       0.upto 6 do |i|
         planet_relation_number=chain_params["#{PLANETS[i][:planet_prefix]}_relation"].to_i
-        return false if (planet_relation_number > 6) && (planet_relation_number < 100)
+        return "Цепочка построенна не по септенеру. Перегенерируйте цепочку." if (planet_relation_number > 6) && (planet_relation_number < 100) && (chain_params["septener"]=="1")
       end
-      return true
+      return false
   end
 
 end
