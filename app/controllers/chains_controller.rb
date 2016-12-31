@@ -72,7 +72,7 @@ class ChainsController < ApplicationController
     edited_params=chain_params.clone
     # меняем атрибуты цепочки без ее записи
     @chain.assign_attributes(edited_params)
-    if (chain_params[:septener]=='1') && (!Chain.septener?(chain_params))
+    if (chain_params[:septener]=='1') && (Chain.is_incorrect?(chain_params))
       @preview_name=@chain.id.to_s
       flash[:alert]="Цепочка составлена не по септенеру. Перегенерируйте цепочку."
       render action: 'edit'
