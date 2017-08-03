@@ -4,11 +4,11 @@
 
 На пример таких:
 
-<img src="pict/pict1.png">
+<img src=pict/pict1.png />
 
 Или таких:
 
-<img src="pict/pict2.png">
+<img src=pict/pict2.png />
 
 == При написании использовались:
 
