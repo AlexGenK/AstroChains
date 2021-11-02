@@ -12,9 +12,9 @@ class AstroObjectsController < ApplicationController
     # как в капитализированном, так и в обычном виде
     if params[:search]
       if params[:library]==""
-        @astro_objects=AstroObject.where('name LIKE ? OR name LIKE ?', "%#{params[:search].mb_chars.capitalize.to_s}%", "%#{params[:search].mb_chars.downcase.to_s}%").paginate(:page=>params[:page]).order(:name)
+        @astro_objects=AstroObject.find_by_name(params[:search]).paginate(:page=>params[:page]).order(:name)
       else
-        @astro_objects=AstroObject.tagged_with(params[:library]).where('name LIKE ? OR name LIKE ?', "%#{params[:search].mb_chars.capitalize.to_s}%", "%#{params[:search].mb_chars.downcase.to_s}%").paginate(:page=>params[:page]).order(:name)
+        @astro_objects=AstroObject.tagged_with(params[:library]).find_by_name(params[:search]).paginate(:page=>params[:page]).order(:name)
       end
     else
       if params[:library]==""
