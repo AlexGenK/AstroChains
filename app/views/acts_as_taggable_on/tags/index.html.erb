@@ -2,10 +2,21 @@
 
 <h3>Доступные библиотеки:</h3>
 <ul class="list-group">
-<% @tags.each do |item| %>
+<% @tags.each do |tag| %>
 	<li class="list-group-item">
-		<span class="badge"><%= item.taggings_count %></span>
-		<%= item.name %>
+		<div class="btn-group">
+			<%= link_to edit_acts_as_taggable_on_tag_path(tag), 
+				class: "btn btn-primary" do %>
+				<span class="glyphicon glyphicon-edit"></span>
+			<% end %>
+			<%= link_to tag, method: :delete, 
+				class: "btn btn-danger #{'disabled' if tag.taggings_count > 0}",
+				data: {confirm: "Вы уверены, что хотите уделить библиотеку #{tag.name}?"} do %>
+				<span class="glyphicon glyphicon-remove"></span>
+			<% end %>
+		</div>
+		<span class="badge"><%= tag.taggings_count %></span>
+		<%= tag.name %>
 	</li>
 <% end %>
 </ul>
@@ -14,8 +25,5 @@
 		<%= render 'form' %>
 	</div>
 	<div class="col-xs-2">
-		<%= form_tag '/libraries', method: "delete" do %>
-			<%= submit_tag "Удалить пустые", class: "btn btn-danger col-xs-12" %>
-		<% end %>
 	</div>
 </div>
