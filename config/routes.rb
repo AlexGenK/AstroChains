@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :chains
   end
 
-  resources :tags
+  namespace :acts_as_taggable_on do
+    resources :tags
+  end
 
 end

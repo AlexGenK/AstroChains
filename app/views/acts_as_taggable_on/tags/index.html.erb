@@ -11,14 +11,7 @@
 </ul>
 <div class="row">
 	<div class="col-xs-10">
-		<%= form_tag '/libraries' do %>
-			<div class='input-group'>
-				<%= text_field_tag :addlib, params[:addlib], placeholder: "Наименование библиотеки", class: "form-control" %>
-				<span class='input-group-btn'>
-					<%= submit_tag "Добавить", class: "btn btn-primary" %>
-				</span>
-			</div>
-		<% end %>
+		<%= render 'form' %>
 	</div>
 	<div class="col-xs-2">
 		<%= form_tag '/libraries', method: "delete" do %>
