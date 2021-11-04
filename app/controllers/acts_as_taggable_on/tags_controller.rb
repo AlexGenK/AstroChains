@@ -1,7 +1,7 @@
 class ActsAsTaggableOn::TagsController < ApplicationController
     def index
         @tag=ActsAsTaggableOn::Tag.new
-        @tags=ActsAsTaggableOn::Tag.all
+        @tags=ActsAsTaggableOn::Tag.order(:name)
     end
 
     def create
