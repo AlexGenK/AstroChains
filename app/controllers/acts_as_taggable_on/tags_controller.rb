@@ -10,6 +10,12 @@ class ActsAsTaggableOn::TagsController < ApplicationController
         redirect_to acts_as_taggable_on_tags_path
     end
 
+    def destroy
+        @tag = ActsAsTaggableOn::Tag.find(params[:id])
+        @tag.destroy
+        redirect_to acts_as_taggable_on_tags_path
+    end
+
     private
 
     def tags_params
