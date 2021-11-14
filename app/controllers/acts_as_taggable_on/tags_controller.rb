@@ -1,4 +1,6 @@
 class ActsAsTaggableOn::TagsController < ApplicationController
+    before_action :set_tag, only: [:edit, :update, :destroy]
+
     def index
         @tag=ActsAsTaggableOn::Tag.new
         @tags=ActsAsTaggableOn::Tag.order(:name)
@@ -11,14 +13,25 @@ class ActsAsTaggableOn::TagsController < ApplicationController
     end
 
     def destroy
-        @tag = ActsAsTaggableOn::Tag.find(params[:id])
         @tag.destroy
+        redirect_to acts_as_taggable_on_tags_path
+    end
+
+    def edit
+    end
+
+    def update
+        @tag.update(tag_params)
         redirect_to acts_as_taggable_on_tags_path
     end
 
     private
 
-    def tags_params
-        params.require(:tag).permit(:name)
+    def tag_params
+        params.require(:acts_as_taggable_on_tag).permit(:name)
+    end
+
+    def set_tag
+        @tag = @tag = ActsAsTaggableOn::Tag.find(params[:id])
     end
 end
