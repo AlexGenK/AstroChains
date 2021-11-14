@@ -89,14 +89,14 @@ class AstroObjectsController < ApplicationController
   end
 
   def destroy
-
+    
     # перед удалением объекта удаляются также все изображеня цепочек диспозиций этого объекта, если они существуют
     Chain.where(astro_object_id: params[:id]).each do |item|
       File.delete("./public/images/chaingraphs/#{item.id}.png") if File.exist?("./public/images/chaingraphs/#{item.id}.png")
     end
     
     AstroObject.find(params[:id]).destroy
-    redirect_to astro_objects_path
+    redirect_to astro_objects_path(page: params[:page])
   end
 
   private

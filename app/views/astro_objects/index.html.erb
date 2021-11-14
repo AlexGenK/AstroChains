@@ -95,7 +95,7 @@
 				<br>
 			</div>
 			<p><%= link_to "Редактировать", edit_astro_object_path(item), class: "btn btn-default btn-block no-overflow" %></p>
-			<p><%= link_to "Удалить", astro_object_path(item), method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-danger btn-block no-overflow" %></p>
+			<p><%= link_to "Удалить", astro_object_path(item, page: params[:page],), method: :delete, data: {confirm: "Вы уверены?"}, class: "btn btn-danger btn-block no-overflow" %></p>
 		</div>
 	</div>
 	<hr>
