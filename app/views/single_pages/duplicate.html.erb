@@ -2,7 +2,7 @@
 <% @duplicates.each do |key, val| %>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <%= key || 'Нет даты' %>
+            <b><%= key || 'Нет даты' %></b>
         </div>
         <ul class="list-group">
             <% dup_objects = AstroObject.where(date: key).order(:name) %>
