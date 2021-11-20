@@ -58,6 +58,7 @@ class AstroObjectsController < ApplicationController
 
   def show
     @astro_object=AstroObject.find(params[:id])
+    @duplicates=AstroObject.where(date: @astro_object.date).order(:name)
     @taglist=@astro_object.tag_list.sort
     @chains=@astro_object.chains.all
   end

@@ -62,7 +62,17 @@
 	</div>
 </div>
 <hr>
-
+<% if @duplicates&.size > 1 %>
+	<h3>Имеются дубликаты:</h3>
+		<% @duplicates.each do |item| %>
+			<ul>
+				<% if item.id != @astro_object.id %>
+					<li><%= link_to item.name, astro_object_path(item) %></li>
+				<% end %>
+			</ul>
+		<% end %>
+	<hr>
+<% end %>
 <!-- выводятся цепочки диспозиций, построенные для объекта -->
 <h3>Построенные цепочки:</h3>
 <%= link_to "Создать новую цепочку", new_astro_object_chain_path(@astro_object), class: "btn btn-primary" %>
