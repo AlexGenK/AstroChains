@@ -10,4 +10,8 @@ class AstroObject < ActiveRecord::Base
               "%#{name.mb_chars.downcase.to_s}%",
               "%#{name.mb_chars.upcase.to_s}%")
   end
+
+  def self.find_dublicate(field)
+    self.group(field).having('COUNT(*) > 1').count
+  end
 end

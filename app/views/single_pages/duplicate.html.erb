@@ -1,0 +1,16 @@
+<h1>Список найденных дубликатов</h1>
+<% @duplicates.each do |key, val| %>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <%= key || 'Нет даты' %>
+        </div>
+        <ul class="list-group">
+            <% dup_objects = AstroObject.where(date: key).order(:name) %>
+            <% dup_objects.each do |item| %>
+                <li class="list-group-item">
+                    <%= link_to item.name, astro_object_path(item) %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
