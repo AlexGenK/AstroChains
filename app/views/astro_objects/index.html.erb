@@ -6,7 +6,7 @@
 			<div class='col-xs-12 col-sm-6'>
 				<div class='input-group'>
 				<%= label_tag :library, 'Библиотека:', class: "input-group-addon"%>
-				<%= select_tag :library, options_from_collection_for_select(@taglist, "name", "name", session[:library]), include_blank: 'Все', class: "form-control" %>
+				<%= select_tag :library, options_from_collection_for_select(@taglist, "name", "name", session[:library]), class: "selectpicker form-control", multiple: true %>
 			</div>
 			</div>
 			<div class='col-xs-12 col-sm-6'>
@@ -103,3 +103,12 @@
 
 <!-- пагинация -->
 <%= will_paginate @astro_objects, renderer: BootstrapPagination::Rails %>
+
+<!-- пикер для выбора библиотеки -->
+<script type="text/javascript">
+    $(function () {
+        $('.selectpicker').selectpicker({
+  			size: 5
+		});
+    });
+</script>

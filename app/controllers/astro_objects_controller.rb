@@ -3,7 +3,10 @@ class AstroObjectsController < ApplicationController
 
   def index
     @taglist=ActsAsTaggableOn::Tag.all.order(:name)
-    params[:search]='' if params[:commit]=='Показать все'
+    if params[:commit]=='Показать все'
+      params[:search]='' 
+      params[:library]=''
+    end
     # текущая библиотека сохраняется в сессии
     params[:library]=session[:library] if ( !params[:library] ) && session[:library]
     params[:library]="" if ( !params[:library] ) && ( !session[:library] )
